@@ -1,0 +1,65 @@
+##############################################################################
+# Copyright (c) 2020-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS Stack project contributors. See the LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+##############################################################################
+
+spack:
+  include: [$SYS_TYPE]
+  concretization: separately
+  view: false
+  config:
+    install_tree:
+      root: /usr/workspace/radiuss/install/care-stack
+      padded_length: 128
+      projections:
+        all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
+    misc_cache: $spack/.misc_cache
+    test_stage: $spack/.test_stage
+    'build_stage:':
+    - $spack/var/spack/stage
+
+  packages:
+    all:
+      variants: +cuda cuda_arch=70 +allow-unsupported-compilers
+
+  mirrors:
+    mirror: file:///usr/workspace/radiuss/mirrors/llnl-stack
+  definitions:
+  - compilers: ['%gcc@8.3.1'] # ['%xl@16.1.1.7']
+  - projects:
+    # Spack develop versions
+    ##- umpire@5.0.0~shared ^cmake@3.14.5 ^cuda@10.1.168  # not working
+    #- raja@main ^cmake@3.14.5 ^cuda@10.1.168
+    #- chai+enable_pick@2.3.1 ^cmake@3.14.5 ^cuda@10.1.168 ^umpire@5.0.0~shared
+    #- care@develop ^cmake@3.14.5 ^cuda@10.1.168 ^umpire~shared ^raja~openmp ^chai~shared
+    #- raja@develop ^cmake@3.14.5 ^camp@master
+    # CARE repo's develop versions
+    #- umpire@5.0.0~shared ^cmake@3.14.5 ^cuda@10.1.168 
+    #- raja@main ^cmake@3.14.5 ^cuda@10.1.168
+    ##- chai+enable_pick@2.3.1 ^cmake@3.14.5 ^cuda@10.1.168 # ^umpire@5.0.0~shared
+    #- raja@develop ^cmake@3.14.5
+    - care@develop ^cmake@3.14.5 ^cuda@10.1.168 ^chai~disable_rm
+
+  specs:
+  - matrix:
+    - [$projects]
+    - [$compilers]
+  gitlab-ci:
+    script:
+    - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+    - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
+    - spack -d ci rebuild
+
+    mappings:
+      # lassen
+      - match:
+        - 'target=ppc64le:'
+        runner-attributes:
+          tags: [lassen, shell]
+    service-job-attributes:
+      tags: [lassen, shell]
+      before_script:
+      - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+      - spack env activate --without-view .
