@@ -1,8 +1,8 @@
 .. _spack-pipeline-feature:
 
-============================
-Using Spack Pipeline Feature
-============================
+===============================================
+Using Spack Pipeline Feature without Containers
+===============================================
 
 Spack provides a feature to generate a GitLab pipeline that will build all the
 specs of a given environment in a GitLab pipeline. This feature is documented
@@ -10,20 +10,24 @@ by `Spack <https://spack.readthedocs.io/en/latest/pipelines.html>`_ and was
 originally introduced to run on cloud resource.
 
 We intend to illustrate the use of Spack pipelines on an HPC cluster, and not
-for deployment, but rather for testing.
+for deployment, but rather for testing. This typically means we are not using
+containers, our runners have access to the shared file system.
 
 
-Using a unique instance of Spack
-================================
+Cloning and sharing a Spack instance
+====================================
 
-One of the first special feature that appears in our situation is that we don't
-have Spack already on the system, and we don't want to clone it in each job.
+First of all, we don't have Spack already on the system. Instead, we want to
+pinpoint exactly the version of Spack to be used in the CI pipeline.
+
+Also, we don't want to clone Spack in each job. So we will setup a Spack
+instance shared by all the CI jobs (remember we are not using containers here).
 
 Requirements
 ------------
 
-#. We want to use a single instance of Spack accross all the CI jobs, for
-   performance reasons.
+#. We want to use a single instance of Spack across all the CI jobs of a given
+   pipeline, for performance reasons.
 
 #. We don't want two independent pipelines to use the same instance of Spack,
    to avoid locks and conflicts on the Spack version used.
@@ -33,7 +37,7 @@ Requirements
 Implementation
 --------------
 
-In terms of implementation, we can start with a script to get Spack.
+In terms of implementation, we start with a script to get Spack.
 
 --------
 
@@ -62,8 +66,7 @@ This code is called in CI by a dedicated job:
 
 --------
 
-But the most critical part is how to share the location of Spack with the child
-pipeline.
+Then we share the location of Spack with the child pipeline.
 
 We first create a global variable for the path, made "unique" by using the
 commit ID:
@@ -78,18 +81,19 @@ Then we propagate it to the child pipelines in the trigger job:
    :start-after: [send-variable-child--]
    :end-before: [--send-variable-child]
 
-The important thing to note here is that we need to change the variable name to
-pass it to the child pipeline. This has been
-`reported to GitLab <https://gitlab.com/gitlab-org/gitlab/-/issues/213729>`_.
+.. note:: We need to change the variable name to pass it to the child pipeline.
+   This has been`reported to GitLab
+   <https://gitlab.com/gitlab-org/gitlab/-/issues/213729>`_.
 
 Managing the GPG key
 --------------------
 
-One of the first blocking point while attempting to share a single Spack
-instance will be GPG key management.
+A blocking point while attempting to share a single Spack instance has to do
+with GPG key management.
 
 In the general case each build jobs will register the mirror key, which will
-result in deadlocks in our case. We can instead register the key ahead of time.
+result in deadlocks in our case. We can instead register the key once, ahead
+of time.
 
 We will produce a GPG key using an instance of Spack, and then create a back-up
 location, so that we can use it for any spack instance we create in the CI
@@ -131,7 +135,6 @@ is already set.
    </details>
 
 --------
-
 
 Only generate one pipeline per stage
 ------------------------------------
@@ -209,8 +212,9 @@ making them specific to that instance by design:
    note that we use it on the ``build_stage`` subsection, since it is a list
    that would otherwise consist in the merge of all the scopes.
 
-Performance optimization
-------------------------
+
+Future works
+============
 
 Several ways of improvement we are exploring:
 
