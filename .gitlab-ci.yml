@@ -19,7 +19,6 @@ variables:
 #[one-generate-per-stage--]
 stages:
   - get-spack
-  - concretize-test
   - generate-quartz
   - generate-lassen
   - build
