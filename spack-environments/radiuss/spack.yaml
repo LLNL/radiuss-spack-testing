@@ -89,7 +89,11 @@ spack:
           - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
-          retry: 3
+          # [retry-on-script-failure--]
+          retry:
+            max: 2
+            when: script_failure
+          # [--retry-on-script-failure]
 
       # lassen
       - match:
@@ -102,7 +106,9 @@ spack:
           #[--child-variables]
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
-          retry: 3
+          retry:
+            max: 2
+            when: script_failure
 
     service-job-attributes:
       tags: [quartz, shell]

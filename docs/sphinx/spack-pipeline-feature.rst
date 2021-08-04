@@ -218,6 +218,33 @@ making them specific to that instance by design:
    that would otherwise consist in the merge of all the scopes.
 
 
+Issues and workarounds
+======================
+
+Random failures
+---------------
+
+Sometimes, some jobs will fails for reasons that have not been explored yet,
+mainly because those bugs are not reproducible.
+
+As an example:
+
+.. code-block:: bash
+   ==> [2021-08-04-07:14:33.660115] Copying build log ([...]/spack-build-out.txt) to artifacts ([...]/spack-build-out.txt)
+   ==> [2021-08-04-07:14:33.662652] Error: Unable to copy build logs from stage to artifacts due to exception: [Errno 2] No such file or directory: '[...]/spack-build    -out.txt'
+   ==> [2021-08-04-07:14:33.662744] spack install exited non-zero, will not create buildcach
+
+To work around this, we ask Gitlab to retry jobs twice before giving up.
+
+.. literalinclude:: ../../spack-environments/radiuss/spack.yaml
+   :start-after: [retry-on-script-failure--]
+   :end-before: [--retry-on-script-failure]
+
+.. note::
+   We restrict retrying a job to script failure so that we don't unnecessarily
+   stress the system when the failure comes from a system issue.
+
+
 Future works
 ============
 
