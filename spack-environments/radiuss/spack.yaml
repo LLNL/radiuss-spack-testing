@@ -89,6 +89,7 @@ spack:
           - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
+          retry: 3
 
       # lassen
       - match:
@@ -101,6 +102,8 @@ spack:
           #[--child-variables]
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
+          retry: 3
+
     service-job-attributes:
       tags: [quartz, shell]
       before_script:
