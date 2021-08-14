@@ -27,7 +27,7 @@ spack:
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/llnl-stack
   definitions:
-  - compilers: ['%gcc@8.3.1'] # ['%xl@16.1.1.7']
+  - compilers: ['%gcc@8.3.1', '%clang@10.0.1'] # ['%xl@16.1.1.7']
   - projects:
     # Spack develop versions
     ##- umpire@5.0.0~shared ^cmake@3.14.5 ^cuda@10.1.168  # not working
