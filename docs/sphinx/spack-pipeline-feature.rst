@@ -224,7 +224,7 @@ Issues and workarounds
 Random failures
 ---------------
 
-Sometimes, some jobs will fails for reasons that have not been explored yet,
+Sometimes, some jobs will fail for reasons that have not been explored yet,
 mainly because those bugs are not reproducible.
 
 As an example:
