@@ -1,3 +1,10 @@
+##############################################################################
+# Copyright (c) 2020-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS Stack project contributors. See the LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+##############################################################################
+
 compilers::
 - compiler:
     spec: clang@3.9.1
