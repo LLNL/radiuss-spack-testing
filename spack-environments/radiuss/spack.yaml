@@ -34,7 +34,8 @@ spack:
       - '%clang@10.0.0'
     when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
   - compilers:
-      - '%xl@16.1.1.7 cxxflags=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1 cflags=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1'
+      - '%xl@16.1.1.7'
+      #- '%xl@16.1.1.7 cxxflags=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1 cflags=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   #[definitions--]
   - radiuss-projects:
@@ -65,7 +66,7 @@ spack:
     - py-maestrowf@1.1.8
     - conduit@0.7.1
     - zfp@0.5.5
-    - axom@0.5.0
+    - axom@0.5.0 +mfem ~openmp ~cpp14
     - caliper@2.5.0 ~libdw ~papi
     #- ascent@0.7.0 #ascent requires vtk-m and vtk-h, which fail to build
     #- scr@2.0.0
