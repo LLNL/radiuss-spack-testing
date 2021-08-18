@@ -17,7 +17,16 @@ packages::
     # us to run on broadwell as well
     target: [ppc64le]
     compiler: [gcc, pgi, clang, xl]
-
+  cmake:
+    version: [3.18.0, 3.20.2, 3.14.5]
+    buildable: false
+    externals:
+    - spec: cmake@3.14.5
+      prefix: /usr/tce/packages/cmake/cmake-3.14.5
+    - spec: cmake@3.18.0
+      prefix: /usr/tce/packages/cmake/cmake-3.18.0
+    - spec: cmake@3.20.2
+      prefix: /usr/tce/packages/cmake/cmake-3.20.2
   cuda:
     version: [11.0.2, 10.1.243, 10.1.168, 9.2.148, 8.0]
     buildable: false
@@ -53,14 +62,6 @@ packages::
     - spec: spectrum-mpi@10.3.1.03rtm0%xl@beta2019.06.20
       prefix: /usr/tce/packages/spectrum-mpi/spectrum-mpi-rolling-release-xl-beta-2019.06.20
     buildable: false
-
-  cmake:
-    version: [3.18.0]
-    buildable: false
-    externals:
-    - spec: cmake@3.18.0
-      prefix: /usr/tce/packages/cmake/cmake-3.18.0
-
   python:
     buildable: false
     version: [3.8.2]
@@ -75,13 +76,6 @@ packages::
     externals:
     - spec: netlib-lapack@3.9.0
       prefix: /usr/tcetmp/packages/lapack/lapack-3.9.0-P9-xl-2020.03.18
-
-#   # Blas/Lapack virtual package provider
-#   netlib-lapack:
-#     buildable: false
-#     externals:
-#     - spec: netlib-lapack@3.6.1
-#       prefix: /usr
 
   #ncurses has a bug in their 6.2 that says that getopt is not present
   # see: https://github.com/spack/spack/issues/16269
