@@ -54,7 +54,7 @@ fix-permissions:
   extends: [.on-quartz]
   stage: last
   script:
-    - chmod -R g+rwX /usr/workspace/radiuss/install/radiuss-stack/spack_path_placeholder/spack_path_placeholder/spack_path_placeholder/spack_path_pla/spack-db
+    - chmod -R g+rwX /usr/workspace/radiuss/install/radiuss-stack/spack_path_placeholder/spack_path_placeholder/spack_path_placeholder/spack_path_pla/.spack-db
   when: always
 
 include:
