@@ -22,8 +22,8 @@ variables:
 #[one-generate-per-stage--]
 stages:
   - get-repos
-  - concretize-test
-#  - generate-quartz
+  #- concretize-test
+  #- generate-quartz
   - generate-lassen
   - build
   - rm-repos

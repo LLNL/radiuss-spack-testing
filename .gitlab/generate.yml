@@ -7,6 +7,7 @@
 #
 # Generate CI pipelines for the package in $ENV_NAME
 
+# To use with each job that has to run when an environment name is provided.
 .has_project_name:
   rules:
     - if: '$ENV_NAME == ""'
@@ -15,6 +16,7 @@
       when: always
     - when: on_success
 
+# To use with each job that has to run when no environment is provided.
 .no_project_name:
   rules:
     - if: '$ENV_NAME != ""'
