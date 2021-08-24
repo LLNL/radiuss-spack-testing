@@ -39,7 +39,7 @@ spack:
   #[--definitions]
   specs:
   - matrix:
-    - [$projects, $dependencies]
+    - [$projects]
     - [$compilers]
 
   gitlab-ci:
