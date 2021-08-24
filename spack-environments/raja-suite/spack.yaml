@@ -1,0 +1,74 @@
+##############################################################################
+# Copyright (c) 2021, Lawrence Livermore National Security, LLC and
+# RADIUSS Stack project contributors. See the LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+##############################################################################
+
+spack:
+  #[general--]
+  include: [$SYS_TYPE]
+  concretization: separately
+  view: false
+  #[--general]
+  #[definitions--]
+  definitions:
+  - compilers:
+      - '%gcc@8.3.1'
+    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+  - compilers:
+      - '%clang@10.0.1'
+    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+  #[definitions--]
+  - projects:
+    - chai@develop
+    - raja@develop
+    - umpire@develop
+    - chai@main
+    - raja@main
+    - umpire@main
+    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+  - projects:
+    - chai@develop+cuda
+    - raja@develop+cuda
+    - umpire@develop+cuda
+    - chai@main+cuda
+    - raja@main+cuda
+    - umpire@main+cuda
+    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+  #[--definitions]
+  specs:
+  - matrix:
+    - [$projects, $dependencies]
+    - [$compilers]
+
+  gitlab-ci:
+    mappings:
+      # quartz
+      # [runner-mapping--]
+      - match:
+        - target=broadwell
+        runner-attributes:
+          tags: [quartz, shell]
+      # [--runner-mapping]
+          script:
+          - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+          - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
+          - spack -d ci rebuild
+
+      # lassen
+      - match:
+        - 'target=ppc64le:'
+        runner-attributes:
+          tags: [lassen, shell]
+          script:
+          #[child-variables--]
+          - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+          #[--child-variables]
+          - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
+          - spack -d ci rebuild
+    service-job-attributes:
+      tags: [quartz, shell]
+      before_script:
+      - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+
