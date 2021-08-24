@@ -11,6 +11,9 @@ spack:
   concretization: separately
   view: false
   #[--general]
+  #[--config-override]
+  mirrors:
+    mirror: file:///usr/workspace/radiuss/mirrors/raja-suite
   #[definitions--]
   definitions:
   - compilers:
@@ -51,7 +54,7 @@ spack:
   #[--definitions]
   specs:
   - matrix:
-    - [$projects, $dependencies]
+    - [$projects]
     - [$compilers]
 
   gitlab-ci:
