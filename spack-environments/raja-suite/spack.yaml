@@ -12,6 +12,17 @@ spack:
   view: false
   #[--general]
   #[--config-override]
+  config:
+    install_tree:
+      root: /usr/workspace/radiuss/install/raja-suite
+      padded_length: 128
+      projections:
+        all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
+    misc_cache: $spack/.misc_cache
+    test_stage: $spack/.test_stage
+    'build_stage:':
+    - $spack/var/spack/stage
+  #[--config-override]
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/raja-suite
   #[definitions--]
