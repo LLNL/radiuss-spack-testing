@@ -39,14 +39,25 @@ spack:
     - chai@main
     - chai@2.4.0
     - chai@2.3.0
+    - chai@2.2.2
+    - chai@2.2.1
+    - chai@2.2.0
     - raja@develop
     - raja@main
     - raja@0.14.0
     - raja@0.13.0
+    - raja@0.12.1
+    - raja@0.12.0
     - umpire@develop
     - umpire@main
     - umpire@6.0.0
     - umpire@5.0.1
+    - umpire@5.0.0
+    - umpire@4.1.2
+    - umpire@4.1.1
+    - umpire@4.1.0
+    - umpire@4.0.1
+    - umpire@4.0.0
     when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
   - projects:
     - chai@develop+cuda
