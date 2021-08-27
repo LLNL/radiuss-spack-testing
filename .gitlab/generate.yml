@@ -12,7 +12,7 @@
   rules:
     - if: '$ENV_NAME == ""'
       when: never
-    - if: '$CI_JOB_NAME == "rm-spack"'
+    - if: '$CI_JOB_NAME == "rm-repos"'
       when: always
     - when: on_success
 
@@ -26,35 +26,37 @@
 .generate-pipeline:
   script:
     - . ${SPACK_PATH}/share/spack/setup-env.sh
-    - spack env activate spack-environments/${ENV_NAME}
+    - echo $_spack_share_dir
+    - cd spack-environments/${ENV_NAME}
+    - spack ${SPACK_DEBUG} env activate --without-view .
     - spack ${SPACK_DEBUG} ci generate
         --artifacts-root "${CI_PROJECT_DIR}/jobs_scratch_dir"
         --output-file "${CI_PROJECT_DIR}/jobs_scratch_dir/pipeline.yml"
-    - cp -r spack-environments/${ENV_NAME}/${SYS_TYPE} ${CI_PROJECT_DIR}/jobs_scratch_dir/concrete_environment/
+    - cp -r ${SYS_TYPE} ${CI_PROJECT_DIR}/jobs_scratch_dir/concrete_environment/
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
 
-# quartz
-generate-on-quartz:
-  extends: [.generate-pipeline, .on-quartz, .has_project_name]
-  stage: generate-quartz
-  before_script:
-    - scripts/print-variables
+## quartz
+#generate-on-quartz:
+#  extends: [.generate-pipeline, .on-quartz, .has_project_name]
+#  stage: generate-quartz
+#  before_script:
+#    - scripts/print-variables
 
-#[send-variable-child--]
-build-on-quartz:
-  extends: [.has_project_name]
-  stage: build
-  variables:
-    CHILD_SPACK_PATH: ${SPACK_PATH}
-  trigger:
-    include:
-      - artifact: "jobs_scratch_dir/pipeline.yml"
-        job: generate-on-quartz
-    strategy: depend
-  needs: [generate-on-quartz]
-#[--send-variable-child]
+##[send-variable-child--]
+#build-on-quartz:
+#  extends: [.has_project_name]
+#  stage: build
+#  variables:
+#    CHILD_SPACK_PATH: ${SPACK_PATH}
+#  trigger:
+#    include:
+#      - artifact: "jobs_scratch_dir/pipeline.yml"
+#        job: generate-on-quartz
+#    strategy: depend
+#  needs: [generate-on-quartz]
+##[--send-variable-child]
 
 # lassen
 generate-on-lassen:
