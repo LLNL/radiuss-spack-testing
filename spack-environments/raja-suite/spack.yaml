@@ -42,6 +42,13 @@ spack:
     - chai@2.2.2
     - chai@2.2.1
     - chai@2.2.0
+    - chai@develop+raja
+    - chai@main+raja
+    - chai@2.4.0+raja
+    - chai@2.3.0+raja
+    - chai@2.2.2+raja
+    - chai@2.2.1+raja
+    - chai@2.2.0+raja
     - raja@develop
     - raja@main
     - raja@0.14.0
@@ -64,6 +71,10 @@ spack:
     - chai@main+cuda
     - chai@2.4.0+cuda
     - chai@2.3.0+cuda
+    - chai@develop+cuda+raja
+    - chai@main+cuda+raja
+    - chai@2.4.0+cuda+raja
+    - chai@2.3.0+cuda+raja
     - raja@develop+cuda
     - raja@main+cuda
     - raja@0.14.0+cuda
