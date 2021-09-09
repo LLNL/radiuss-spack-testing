@@ -6,12 +6,9 @@
 ##############################################################################
 
 spack:
-  #[general--]
   include: [$SYS_TYPE]
   concretization: separately
   view: false
-  #[--general]
-  #[--config-override]
   config:
     install_tree:
       root: /usr/workspace/radiuss/install/raja-suite
@@ -22,10 +19,8 @@ spack:
     test_stage: $spack/.test_stage
     'build_stage:':
     - $spack/var/spack/stage
-  #[--config-override]
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/raja-suite
-  #[definitions--]
   definitions:
   - compilers:
       - '%gcc@8.3.1'
@@ -33,7 +28,6 @@ spack:
   - compilers:
       - '%clang@10.0.1'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
-  #[definitions--]
   - projects:
     - chai@develop
     - chai@main
@@ -84,7 +78,6 @@ spack:
     - umpire@6.0.0+cuda
     - umpire@5.0.1+cuda
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
-  #[--definitions]
   specs:
   - matrix:
     - [$projects]
@@ -93,12 +86,10 @@ spack:
   gitlab-ci:
     mappings:
       # quartz
-      # [runner-mapping--]
       - match:
         - target=broadwell
         runner-attributes:
           tags: [quartz, shell]
-      # [--runner-mapping]
           script:
           - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
@@ -110,9 +101,7 @@ spack:
         runner-attributes:
           tags: [lassen, shell]
           script:
-          #[child-variables--]
           - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
-          #[--child-variables]
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
     service-job-attributes:
