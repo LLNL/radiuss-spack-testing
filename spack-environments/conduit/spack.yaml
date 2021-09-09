@@ -32,13 +32,11 @@ spack:
     - conduit@develop+python
     - conduit@0.7.2+python
     - conduit@develop~shared ^hdf5~shared
-    - conduit@0.7.2~shared ^hdf5~shared
     when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
   - projects:
     - conduit@develop+python
     - conduit@0.7.2+python
     - conduit@develop~shared ^hdf5~shared
-    - conduit@0.7.2~shared ^hdf5~shared
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   specs:
   - matrix:
