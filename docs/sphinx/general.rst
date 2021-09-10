@@ -108,8 +108,8 @@ Configuration can also be provided directly in the environment:
 Environment spec
 ----------------
 
-We refer to ``Spack documentation on environments
-<https://spack.readthedocs.io/en/latest/environments.html#manually-editing-the-specs-list>``_
+We refer to `Spack documentation on environments
+<https://spack.readthedocs.io/en/latest/environments.html#manually-editing-the-specs-list>`_
 for the ``spec`` section of an environment.
 
 CI configuration of an environment
