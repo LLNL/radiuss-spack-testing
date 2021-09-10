@@ -19,10 +19,11 @@ Structure
 =========
 
 There are two main parts in this projects:
-- The gitlab CI configuration, consisting of YAML files. The parent file is
+
+* The gitlab CI configuration, consisting of YAML files. The parent file is
   ``.gitlab-ci.yml`` and points to sub-parts in ``.gitlab`` using local
   ``includes``.
-- The spack environments, each one defined in a subdirectory of
+* The spack environments, each one defined in a subdirectory of
   ``spack-environments``.
 
 
@@ -41,6 +42,7 @@ global variables defined in ``.gitlab-ci.yml`` are not automatically transmitted
 to the child pipelines.
 
 Among those variables, the user may want to change the value of:
+
 * ``SPACK_REPO``: the repo used to download Spack
 * ``SPACK_REF``: the ref in Spack repo that will be checked out.
 * ``SPACK_DEBUG``: a placeholder to turn on/off spack debug traces.
@@ -108,8 +110,8 @@ Configuration can also be provided directly in the environment:
 Environment spec
 ----------------
 
-We refer to ``Spack documentation on environments
-<https://spack.readthedocs.io/en/latest/environments.html#manually-editing-the-specs-list>``_
+We refer to `Spack documentation on environments
+<https://spack.readthedocs.io/en/latest/environments.html#manually-editing-the-specs-list>`_
 for the ``spec`` section of an environment.
 
 CI configuration of an environment
