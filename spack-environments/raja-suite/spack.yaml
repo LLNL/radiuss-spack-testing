@@ -23,10 +23,36 @@ spack:
     mirror: file:///usr/workspace/radiuss/mirrors/raja-suite
   definitions:
   - compilers:
+      - '%clang@9.0.0'
+      - '%clang@10.0.1'
+      - '%clang@11.0.1'
+      - '%intel@17.0.2'
+      - '%intel@18.0.2'
+      - '%intel@19.0.4'
+      - '%intel@19.1.0'
+      - '%intel@19.1.2'
+      - '%intel@2021.2'
+      - '%intel-oneapi@2021.2-ifort'
+      - '%intel-oneapi@2021.2-ifx'
+      - '%pgi@19.7'
+      - '%pgi@20.1'
+      - '%pgi@21.1'
+      - '%gcc@4.9.3'
+      - '%gcc@8.1.0'
       - '%gcc@8.3.1'
+      - '%gcc@10.2.1'
     when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
   - compilers:
+      - '%clang@9.0.0-ibm'
       - '%clang@10.0.1-ibm'
+      - '%clang@11.0.1-ibm'
+      - '%gcc@8.3.1'
+      - '%gcc@4.9.3'
+      - '%xl@16.1.1.7'
+      - '%xl@16.1.1.10'
+      - '%pgi@19.10'
+      - '%pgi@20.4'
+      - '%pgi@21.3'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   - projects:
     - chai@develop
