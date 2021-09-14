@@ -1,0 +1,3 @@
+[submodule "spack-configs/radiuss"]
+	path = spack-configs/radiuss
+	url = https://github.com/LLNL/radiuss-spack-configs.git
