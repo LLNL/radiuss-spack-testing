@@ -6,7 +6,7 @@
 ##############################################################################
 
 spack:
-  include: [../../spack-configs/radiuss/$SYS_TYPE]
+  include: [$SYS_TYPE]
   concretization: separately
   view: false
   config:
