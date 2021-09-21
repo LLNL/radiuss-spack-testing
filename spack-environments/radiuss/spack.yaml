@@ -14,7 +14,7 @@ spack:
   #[config-override--]
   config:
     install_tree:
-      root: /usr/workspace/radiuss/install/radiuss-stack
+      root: /usr/workspace/radiuss/install/radiuss
       padded_length: 128
       projections:
         all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
@@ -24,8 +24,7 @@ spack:
     - $spack/var/spack/stage
   #[--config-override]
   mirrors:
-    mirror: file:///usr/workspace/radiuss/mirrors/llnl-stack
-#    mirror: file:///usr/workspace/radiuss/mirrors/llnl-stack-new
+    mirror: file:///usr/workspace/radiuss/mirrors/radiuss
   #[definitions--]
   definitions:
   - compilers:
