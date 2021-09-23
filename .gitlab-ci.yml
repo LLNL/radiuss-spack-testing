@@ -10,19 +10,17 @@ variables:
   SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/llnl-stack-${CI_COMMIT_SHORT_SHA}
   SPACK_PATH: ${CI_BUILDS_DIR}/llnl-stack-${CI_COMMIT_SHORT_SHA}/spack
   #[--create-unique-path]
-  SPACK_REPO: https://github.com/spack/spack.git
-  SPACK_REF: develop
   SPACK_DEBUG: "-d"
-  ENV_NAME: "radiuss"
+  ENV_NAME: ""
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
 stages:
-  - get-spack
+  - setup
   - generate-quartz
   - generate-lassen
   - build
-  - rm-spack
+  - clean
 #[--one-generate-per-stage]
 
 .on-quartz:
@@ -31,21 +29,17 @@ stages:
 .on-lassen:
   tags: [shell, lassen]
 
-#[get-spack--]
-get-spack:
-  extends: [.on-quartz]
-  stage: get-spack
-  script:
-    - scripts/get-spack
-#[--get-spack]
-
-#[rm-spack--]
-rm-spack:
-  extends: [.on-quartz]
-  stage: rm-spack
-  script:
-    - scripts/remove-spack
-#[--rm-spack]
-
 include:
-  - .gitlab/generate.yml
+  - local: spack-environments/radiuss/ci-variables.yml
+    rules:
+      - if: '$ENV_NAME == "radiuss"'
+  - local: spack-environments/raja-suite/ci-variables.yml
+    rules:
+      - if: '$ENV_NAME == "raja-suite"'
+  - local: .gitlab/generate.yml
+    rules:
+      - if: '$ENV_NAME =~ /^./'
+    #- spack-environments/${ENV_NAME}/ci-variables.yml
+  - local: .gitlab/no-env-name.yml
+    rules:
+      - if: '$ENV_NAME == ""'

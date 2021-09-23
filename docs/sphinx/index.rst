@@ -62,7 +62,8 @@ Table of Contents
 .. toctree::
    :maxdepth: 2
 
-   general
+   structure
+   add-environment
    spack-pipeline-feature
 
 Indices and tables
