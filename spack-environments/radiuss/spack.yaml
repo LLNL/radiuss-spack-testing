@@ -22,6 +22,8 @@ spack:
     test_stage: $spack/.test_stage
     'build_stage:':
     - $spack/var/spack/stage
+  bootstrap:
+    root: /usr/workspace/radiuss/store/radiuss
   #[--config-override]
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/radiuss
