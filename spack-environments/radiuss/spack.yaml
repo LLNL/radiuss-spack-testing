@@ -35,7 +35,7 @@ spack:
 #      - '%clang@10.0.0'
     when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
   - compilers:
-      #- '%xl@16.1.1.7'
+      - '%xl@16.1.1.7'
       #- '%xl@16.1.1.7 cxxflags=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1 cflags=--gcc-toolchain=/usr/tce/packages/gcc/gcc-8.3.1'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   #[definitions--]
