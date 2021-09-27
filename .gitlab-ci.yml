@@ -16,11 +16,11 @@ variables:
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
 stages:
-  - get-spack
+  - setup
   - generate-quartz
   - generate-lassen
   - build
-  - rm-spack
+  - clean
 #[--one-generate-per-stage]
 
 .on-quartz:
@@ -29,24 +29,10 @@ stages:
 .on-lassen:
   tags: [shell, lassen]
 
-#[get-spack--]
-get-spack:
-  extends: [.on-quartz]
-  stage: get-spack
-  script:
-    - scripts/get-spack
-#[--get-spack]
-
-#[rm-spack--]
-rm-spack:
-  extends: [.on-quartz]
-  stage: rm-spack
-  script:
-    - scripts/remove-spack
-#[--rm-spack]
-
 include:
   - .gitlab/generate.yml
+    rules:
+      - if: '$ENV_NAME ~= ""'
     #- spack-environments/${ENV_NAME}/ci-variables.yml
   - spack-environments/radiuss/ci-variables.yml
     rules:
@@ -54,3 +40,6 @@ include:
   - spack-environments/raja-suite/ci-variables.yml
     rules:
       - if: '$ENV_NAME == "raja-suite"'
+  - .gitlab/no-env-name.yml
+    rules:
+      - if: '$ENV_NAME == ""'
