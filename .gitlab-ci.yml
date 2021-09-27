@@ -32,7 +32,7 @@ stages:
 include:
   - local: .gitlab/generate.yml
     rules:
-      - if: '$ENV_NAME ~= ""'
+      - if: '$ENV_NAME != ""'
     #- spack-environments/${ENV_NAME}/ci-variables.yml
   - local: spack-environments/radiuss/ci-variables.yml
     rules:
