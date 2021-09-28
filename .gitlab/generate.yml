@@ -7,21 +7,22 @@
 #
 # Generate CI pipelines for the package in $ENV_NAME
 
-# To use with each job that has to run when an environment name is provided.
-.has_project_name:
-  rules:
-    - if: '$ENV_NAME == ""'
-      when: never
-    - if: '$CI_JOB_NAME == "rm-spack"'
-      when: always
-    - when: on_success
+#[get-spack--]
+get-spack:
+  extends: [.on-quartz]
+  stage: setup
+  script:
+    - scripts/get-spack
+#[--get-spack]
 
-# To use with each job that has to run when no environment is provided.
-.no_project_name:
-  rules:
-    - if: '$ENV_NAME != ""'
-      when: never
-    - when: on_success
+#[rm-spack--]
+rm-spack:
+  extends: [.on-quartz]
+  stage: clean
+  script:
+    - scripts/remove-spack
+  when: always
+#[--rm-spack]
 
 .generate-pipeline:
   script:
@@ -37,14 +38,13 @@
 
 # quartz
 generate-on-quartz:
-  extends: [.generate-pipeline, .on-quartz, .has_project_name]
+  extends: [.generate-pipeline, .on-quartz]
   stage: generate-quartz
   before_script:
     - scripts/print-variables
 
 #[send-variable-child--]
 build-on-quartz:
-  extends: [.has_project_name]
   stage: build
   variables:
     CHILD_SPACK_PATH: ${SPACK_PATH}
@@ -58,13 +58,12 @@ build-on-quartz:
 
 # lassen
 generate-on-lassen:
-  extends: [.generate-pipeline, .on-lassen, .has_project_name]
+  extends: [.generate-pipeline, .on-lassen]
   stage: generate-lassen
   before_script:
     - scripts/print-variables
 
 build-on-lassen:
-  extends: [.has_project_name]
   stage: build
   variables:
     CHILD_SPACK_PATH: ${SPACK_PATH}
@@ -74,4 +73,3 @@ build-on-lassen:
         job: generate-on-lassen
     strategy: depend
   needs: [generate-on-lassen]
-

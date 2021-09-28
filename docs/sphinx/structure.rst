@@ -4,7 +4,7 @@
 .. ##
 .. ## SPDX-License-Identifier: (MIT)
 
-.. _general:
+.. _structure:
 
 The goal of this project is to provide a code infrastructure using Spack
 pipeline feature to test on LC machines any Spack environment of interest for

@@ -1,0 +1,16 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+#
+# Run a simple jobs to display instructions when no env name was specified.
+
+no-env-name:
+  extends: [.on-quartz]
+  stage: setup
+  script:
+    - echo "Variable \"ENV_NAME\" was not set."
+    - echo "\"ENV_NAME\" is required and should point to an existing directory in spack-environments."
+    - exit 1
