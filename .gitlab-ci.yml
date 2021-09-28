@@ -38,7 +38,7 @@ include:
       - if: '$ENV_NAME == "raja-suite"'
   - local: .gitlab/generate.yml
     rules:
-      - if: '$ENV_NAME != ""'
+      - if: $ENV_NAME
     #- spack-environments/${ENV_NAME}/ci-variables.yml
   - local: .gitlab/no-env-name.yml
     rules:

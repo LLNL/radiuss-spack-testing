@@ -73,4 +73,3 @@ build-on-lassen:
         job: generate-on-lassen
     strategy: depend
   needs: [generate-on-lassen]
-
