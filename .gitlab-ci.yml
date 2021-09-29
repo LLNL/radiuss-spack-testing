@@ -30,16 +30,10 @@ stages:
   tags: [shell, lassen]
 
 include:
+  - local: .gitlab/generate.yml
   - local: spack-environments/radiuss/ci-variables.yml
     rules:
       - if: '$ENV_NAME == "radiuss"'
   - local: spack-environments/raja-suite/ci-variables.yml
     rules:
       - if: '$ENV_NAME == "raja-suite"'
-  - local: .gitlab/generate.yml
-    rules:
-      - if: '$ENV_NAME =~ /^./'
-    #- spack-environments/${ENV_NAME}/ci-variables.yml
-  - local: .gitlab/no-env-name.yml
-    rules:
-      - if: '$ENV_NAME == ""'
