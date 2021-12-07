@@ -9,14 +9,18 @@ then
   # A shallow clone is enough, and much faster.
   git clone ${SPACK_REPO} --depth 1 --branch ${SPACK_REF} ${SPACK_PATH}
   # We tag the commit so we can retrieve which one was used by a given pipeline.
-  git tag ${CI_PIPELINE_ID}
+  if [[ ! -z ${CI_PIPELINE_ID} ]]; then
+    git tag ${CI_PIPELINE_ID}
+  fi
 else
   cd ${SPACK_PATH}
   git checkout -b temp
   git branch -D ${SPACK_REF}
   git fetch --depth 1 ${SPACK_REPO} ${SPACK_REF}:${SPACK_REF}
   git checkout ${SPACK_REF}
-  git tag ${CI_PIPELINE_ID}
+  if [[ ! -z ${CI_PIPELINE_ID} ]]; then
+    git tag ${CI_PIPELINE_ID}
+  fi
   git branch -D temp
   cd -
 fi

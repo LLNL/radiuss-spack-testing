@@ -8,9 +8,9 @@ SPACK_ENV_PATH=$REPO_DIR
 
 # get-spack variables
 export SPACK_REPO=https://github.com/spack/spack.git
-export SPACK_PATH=$BASE_DIR/spack
+export SPACK_PATH=$BASE_PATH/spack
 export SPACK_REF="${SPACK_REF:-develop}"
-export CI_PIPELINE_ID="${CI_PIPELINE_ID:-default-value}"
+export CI_PIPELINE_ID="${CI_PIPELINE_ID:-}"
 
 echo "~~~~~~~~~~~~~ test-blt variables ~~~~~~~~~~~~~~"
   echo SCRIPT_DIR=$SCRIPT_DIR
