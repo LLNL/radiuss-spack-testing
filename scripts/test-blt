@@ -1,0 +1,24 @@
+#!/bin/bash
+
+BASE_PATH=test_dir
+
+# get-spack variables
+SPACK_REPO=https://github.com/spack/spack.git
+SPACK_PATH=$BASE_DIR/spack
+SPACK_REF="${CI_PIPELINE_ID:-3d1b9e4dbc31d1cf7d162de5189e858d7d5870f3}"
+CI_PIPELINE_ID="${CI_PIPELINE_ID:-default-value}"
+
+
+rm -rf $BASE_PATH
+mkdir $BASE_PATH
+
+cd $BASE_PATH
+  # Setup spack
+  ./get-spack
+  
+
+  # clone BLT
+  git clone https://github.com/LLNL/blt.git blt
+
+cd ..
+
