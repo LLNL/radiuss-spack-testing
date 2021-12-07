@@ -46,9 +46,6 @@ cd $BASE_PATH
     echo "~~ spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml"
     ../$SPACK_BIN/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
 
-    echo "~~ spack find -cvl"
-    ../$SPACK_BIN/spack -e test1 find -cvl
-
     echo "~~ spack install --test=root"
     ../$SPACK_BIN/spack -e test1 install --test=root
   cd ..

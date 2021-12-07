@@ -246,6 +246,8 @@ class Blttest(CachedCMakePackage, CudaPackage, ROCmPackage):
 
         return entries
 
+    def initconfig_package_entries(self):
+        return []
 
     def cmake_args(self):
         options = []
