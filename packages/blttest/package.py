@@ -28,7 +28,7 @@ def get_spec_path(spec, package_name, path_replacements={}, use_bin=False):
     return path
 
 
-class Blt-test(CachedCMakePackage, CudaPackage, ROCmPackage):
+class Blttest(CachedCMakePackage, CudaPackage, ROCmPackage):
     """This is a package meant to test out basic Spack environments
        against BLT's smoke and internal tests"""
 

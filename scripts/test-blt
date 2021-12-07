@@ -34,10 +34,17 @@ cd $BASE_PATH
   # Load environment and build/test BLT
   mkdir spack-build
   cd spack-build
-    $SPACK_BIN/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
-    $SPACK_BIN/spack env activate test1
-    $SPACK_BIN/spack concretize
-    $SPACK_BIN/spack find -cvl
-    $SPACK_BIN/spack install
+    echo "~~ spack clean"
+    ../$SPACK_BIN/spack clean --misc-cache --failures --python-cache
+    echo "~~ spack env create"
+    ../$SPACK_BIN/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
+    echo "~~ spack env activate"
+    eval `../$SPACK_BIN/spack -d env activate --sh test1`
+    echo "~~ spack concretize"
+    ../$SPACK_BIN/spack concretize
+    echo "~~ spack find"
+    ../$SPACK_BIN/spack find -cvl
+    echo "~~ spack install"
+    ../$SPACK_BIN/spack install
   cd ..
 cd ..

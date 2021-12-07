@@ -9,7 +9,7 @@ spack:
   view: false
   concretization: separately
   specs:
-  - blt-test
+  - blttest
 
   compilers:
   - compiler:
