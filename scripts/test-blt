@@ -8,7 +8,8 @@ SPACK_ENV_PATH=$REPO_DIR
 
 # get-spack variables
 export SPACK_REPO=https://github.com/spack/spack.git
-export SPACK_PATH=$BASE_PATH/spack
+export SPACK_PATH=spack
+export SPACK_BIN=$SPACK_PATH/bin
 export SPACK_REF="${SPACK_REF:-develop}"
 export CI_PIPELINE_ID="${CI_PIPELINE_ID:-}"
 
@@ -33,10 +34,10 @@ cd $BASE_PATH
   # Load environment and build/test BLT
   mkdir spack-build
   cd spack-build
-    $SPACK_PATH/bin/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
-    $SPACK_PATH/bin/spack env activate test1
-    $SPACK_PATH/bin/spack concretize
-    $SPACK_PATH/bin/spack find -cvl
-    $SPACK_PATH/bin/spack install
+    $SPACK_BIN/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
+    $SPACK_BIN/spack env activate test1
+    $SPACK_BIN/spack concretize
+    $SPACK_BIN/spack find -cvl
+    $SPACK_BIN/spack install
   cd ..
 cd ..
