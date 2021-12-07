@@ -4,6 +4,8 @@ SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 REPO_DIR=$SCRIPT_DIR/..
 BASE_PATH=test_dir
 
+SPACK_ENV_PATH=$REPO_DIR
+
 # get-spack variables
 export SPACK_REPO=https://github.com/spack/spack.git
 export SPACK_PATH=spack
@@ -24,11 +26,17 @@ rm -rf $BASE_PATH
 mkdir $BASE_PATH
 
 cd $BASE_PATH
-  # Setup spack
+  # Setup Spack
   $SCRIPT_DIR/get-spack
   cp -R $REPO_DIR/packages/* $SPACK_PATH/var/spack/repos/builtin/packages
 
-  # clone BLT
-  git clone https://github.com/LLNL/blt.git blt
-
+  # Load environment and build/test BLT
+  mkdir spack-build
+  cd spack-build
+    spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
+    spack env activate test1
+    spack concretize
+    spack find -cvl
+    spack install
+  cd ..
 cd ..

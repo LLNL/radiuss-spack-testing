@@ -1,0 +1,118 @@
+###############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and other
+# RADIUSS-CI project contributors. See top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: MIT
+###############################################################################
+
+spack:
+  view: false
+  concretization: separately
+  spec:
+  - blt-test
+
+  compilers:
+  - compiler:
+      environment: {}
+      extra_rpaths: []
+      flags:
+        cflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-8.1.0
+        cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-8.1.0
+      modules:
+      - clang/10.0.0
+      operating_system: rhel7
+      paths:
+        cc: /usr/tce/packages/clang/clang-10.0.0/bin/clang
+        cxx: /usr/tce/packages/clang/clang-10.0.0/bin/clang++
+        f77: /usr/tce/packages/gcc/gcc-8.1.0/bin/gfortran 
+        fc: /usr/tce/packages/gcc/gcc-8.1.0/bin/gfortran
+      spec: clang@10.0.0
+      target: x86_64
+
+  packages:
+    all:
+      # This defaults us to machine specific flags of ivybridge which allows
+      # us to run on broadwell as well
+      target: [ivybridge]
+      compiler: [gcc, intel, pgi, clang, xl, nag]
+      providers:
+        blas: [netlib-lapack]
+        lapack: [netlib-lapack]
+        mpi: [mvapich2]
+
+  # LLNL toss3 CUDA
+    cuda:
+      buildable: false
+      externals:
+      - spec: cuda@10.2
+        prefix: /opt/cudatoolkit/10.2
+
+  # Lock down which MPI we are using
+    mpi:
+      buildable: false
+    mvapich2:
+      buildable: false
+      externals:
+      - spec: mvapich2@2.3%clang@10.0.0 process_managers=slurm arch=linux-rhel7-ivybridge
+        prefix: /usr/tce/packages/mvapich2/mvapich2-2.3-clang-10.0.0
+
+    # blas is a bit more complicated because its a virtual package so fake it with
+    # the following per spack docs
+    netlib-lapack:
+      buildable: false
+      externals:
+      - spec: netlib-lapack@3.6.1
+        prefix: /usr
+
+  # System level packages to not build
+    autoconf:
+      buildable: false
+      externals:
+      - spec: autoconf
+        prefix: /usr
+    automake:
+      buildable: false
+      externals:
+      - spec: automake
+        prefix: /usr
+    bzip2:
+      buildable: false
+      externals:
+      - spec: bzip2
+        prefix: /usr
+    cmake:
+      version: [3.18.0]
+      buildable: false
+      externals:
+      - spec: cmake@3.18.0
+        prefix: /usr/tce/packages/cmake/cmake-3.18.0
+    gettext:
+      buildable: false
+      externals:
+      - spec: gettext
+        prefix: /usr
+    libtool:
+      buildable: false
+      externals:
+      - spec: libtool
+        prefix: /usr
+    m4:
+      buildable: false
+      externals:
+      - spec: m4
+        prefix: /usr
+    perl:
+      buildable: false
+      externals:
+      - spec: perl
+        prefix: /usr
+    pkg-config:
+      buildable: false
+      externals:
+      - spec: pkg-config
+        prefix: /usr
+    tar:
+      buildable: false
+      externals:
+      - spec: tar
+        prefix: /usr
