@@ -34,8 +34,11 @@ cd $BASE_PATH
   # Load environment and build/test BLT
   mkdir spack-build
   cd spack-build
-    echo "~~ kill previous environment"
+    echo "~~ clear SPACK_ENV"
     export SPACK_ENV=
+
+    echo "~~ do not use home directory"
+    export SPACK_DISABLE_LOCAL_CONFIG=true
 
     echo "~~ spack clean"
     ../$SPACK_BIN/spack clean --misc-cache --failures --python-cache
@@ -53,6 +56,6 @@ cd $BASE_PATH
     ../$SPACK_BIN/spack -e test1 find -cvl
 
     echo "~~ spack install"
-    ../$SPACK_BIN/spack -e test1 install
+    ../$SPACK_BIN/spack -e test1 install --test=root
   cd ..
 cd ..
