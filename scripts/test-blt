@@ -1,6 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+REPO_DIR=$SCRIPT_DIR/..
 BASE_PATH=test_dir
 
 # get-spack variables
@@ -11,6 +12,7 @@ export CI_PIPELINE_ID="${CI_PIPELINE_ID:-default-value}"
 
 echo "~~~~~~~~~~~~~ test-blt variables ~~~~~~~~~~~~~~"
   echo SCRIPT_DIR=$SCRIPT_DIR
+  echo REPO_DIR=$REPO_DIR
   echo BASE_PATH=$BASE_PATH
   echo SPACK_REPO=$SPACK_REPO
   echo SPACK_PATH=$SPACK_PATH
@@ -24,6 +26,7 @@ mkdir $BASE_PATH
 cd $BASE_PATH
   # Setup spack
   $SCRIPT_DIR/get-spack
+  cp -R $REPO_DIR/packages/* $SPACK_PATH/var/spack/repos/builtin/packages
 
   # clone BLT
   git clone https://github.com/LLNL/blt.git blt
