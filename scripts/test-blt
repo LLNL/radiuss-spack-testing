@@ -1,24 +1,31 @@
 #!/bin/bash
 
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 BASE_PATH=test_dir
 
 # get-spack variables
-SPACK_REPO=https://github.com/spack/spack.git
-SPACK_PATH=$BASE_DIR/spack
-SPACK_REF="${CI_PIPELINE_ID:-3d1b9e4dbc31d1cf7d162de5189e858d7d5870f3}"
-CI_PIPELINE_ID="${CI_PIPELINE_ID:-default-value}"
+export SPACK_REPO=https://github.com/spack/spack.git
+export SPACK_PATH=spack
+export SPACK_REF="${SPACK_REF:-develop}"
+export CI_PIPELINE_ID="${CI_PIPELINE_ID:-default-value}"
 
+echo "~~~~~~~~~~~~~ test-blt variables ~~~~~~~~~~~~~~"
+  echo SCRIPT_DIR=$SCRIPT_DIR
+  echo BASE_PATH=$BASE_PATH
+  echo SPACK_REPO=$SPACK_REPO
+  echo SPACK_PATH=$SPACK_PATH
+  echo SPACK_REF=$SPACK_REF
+  echo CI_PIPELINE_ID=$CI_PIPELINE_ID
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 
 rm -rf $BASE_PATH
 mkdir $BASE_PATH
 
 cd $BASE_PATH
   # Setup spack
-  ./get-spack
-  
+  $SCRIPT_DIR/get-spack
 
   # clone BLT
   git clone https://github.com/LLNL/blt.git blt
 
 cd ..
-
