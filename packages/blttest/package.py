@@ -261,3 +261,12 @@ class Blttest(CachedCMakePackage, CudaPackage, ROCmPackage):
             'BUILD_SHARED_LIBS', 'shared'))
 
         return options
+
+    @run_after('build')
+    @on_package_attributes(run_tests=True)
+    def build_test(self):
+        with working_dir(self.build_directory):
+            print("Running Blttest Unit Tests...")
+            test_env = {'CTEST_OUTPUT_ON_FAILURE':'1',
+                        'ARGS':'--no-compress-output -T Test -VV'}
+            make("test", env=test_env)
