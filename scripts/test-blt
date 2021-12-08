@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#
+# Note: This is super hacked together during a hackathon and definitely can be improved
+#
+
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 REPO_DIR=$SCRIPT_DIR/..
 BASE_PATH=test_dir
@@ -47,6 +51,10 @@ cd $BASE_PATH
     ../$SPACK_BIN/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
 
     echo "~~ spack install --test=root"
-    ../$SPACK_BIN/spack -e test1 install --test=root
+    ../$SPACK_BIN/spack -e test1 install --keep-stage -v --test=root
+
+    # TODO: convert to junit and add as test artifacts
+    # TODO: copy host-configs to a helpful place
+    # TODO: profit
   cd ..
 cd ..
