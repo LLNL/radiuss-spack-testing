@@ -12,8 +12,6 @@ variables:
   #[--create-unique-path]
   SPACK_DEBUG: "-d"
   ENV_NAME: "raja-suite"
-  SPACK_REPO: https://github.com/spack/spack.git
-  SPACK_REF: develop
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
