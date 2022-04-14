@@ -6,5 +6,5 @@
 ##############################################################################
 
 variables:
-  SPACK_REPO: https://github.com/spack/spack.git
-  SPACK_REF: develop
+  SPACK_REPO: https://github.com/davidbeckingsale/spack.git
+  SPACK_REF: update-raja-suite-2022.03.0
