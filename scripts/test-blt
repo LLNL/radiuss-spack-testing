@@ -1,0 +1,60 @@
+#!/bin/bash
+
+#
+# Note: This is super hacked together during a hackathon and definitely can be improved
+#
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+REPO_DIR=$SCRIPT_DIR/..
+BASE_PATH=test_dir
+
+SPACK_ENV_PATH=$REPO_DIR
+
+# get-spack variables
+export SPACK_REPO=https://github.com/spack/spack.git
+export SPACK_PATH=spack
+export SPACK_BIN=$SPACK_PATH/bin
+export SPACK_REF="${SPACK_REF:-develop}"
+export CI_PIPELINE_ID="${CI_PIPELINE_ID:-}"
+
+echo "~~~~~~~~~~~~~ test-blt variables ~~~~~~~~~~~~~~"
+  echo SCRIPT_DIR=$SCRIPT_DIR
+  echo REPO_DIR=$REPO_DIR
+  echo BASE_PATH=$BASE_PATH
+  echo SPACK_REPO=$SPACK_REPO
+  echo SPACK_PATH=$SPACK_PATH
+  echo SPACK_REF=$SPACK_REF
+  echo CI_PIPELINE_ID=$CI_PIPELINE_ID
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+rm -rf $BASE_PATH
+mkdir $BASE_PATH
+
+cd $BASE_PATH
+  # Setup Spack
+  $SCRIPT_DIR/get-spack
+  cp -R $REPO_DIR/packages/* $SPACK_PATH/var/spack/repos/builtin/packages
+
+  # Load environment and build/test BLT
+  mkdir spack-build
+  cd spack-build
+    echo "~~ clear SPACK_ENV"
+    export SPACK_ENV=
+
+    echo "~~ do not use home directory"
+    export SPACK_DISABLE_LOCAL_CONFIG=true
+
+    echo "~~ spack clean"
+    ../$SPACK_BIN/spack clean --misc-cache --failures --python-cache
+
+    echo "~~ spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml"
+    ../$SPACK_BIN/spack env create test1 $REPO_DIR/spack-environments/blt-test/toss3-clang10.yaml
+
+    echo "~~ spack install --test=root"
+    ../$SPACK_BIN/spack -e test1 install --keep-stage -v --test=root
+
+    # TODO: convert to junit and add as test artifacts
+    # TODO: copy host-configs to a helpful place
+    # TODO: profit
+  cd ..
+cd ..

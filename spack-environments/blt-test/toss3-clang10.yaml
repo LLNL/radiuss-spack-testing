@@ -1,0 +1,154 @@
+###############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and other
+# RADIUSS-CI project contributors. See top-level COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: MIT
+###############################################################################
+
+spack:
+  view: false
+  concretization: separately
+  specs:
+  - blttest
+
+  config:
+    install_tree:
+      root: $spack/../install
+      padded_length: 128
+      projections:
+        all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
+    misc_cache: $spack/../misc_cache
+    test_stage: $spack/../test_stage
+    build_stage::
+    - $spack/../stage
+
+  compilers::
+  - compiler:
+      environment: {}
+      extra_rpaths: []
+      flags:
+        cflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-8.1.0
+        cxxflags: --gcc-toolchain=/usr/tce/packages/gcc/gcc-8.1.0
+      modules:
+      - clang/10.0.0
+      operating_system: rhel7
+      paths:
+        cc: /usr/tce/packages/clang/clang-10.0.0/bin/clang
+        cxx: /usr/tce/packages/clang/clang-10.0.0/bin/clang++
+        f77: /usr/tce/packages/gcc/gcc-8.1.0/bin/gfortran 
+        fc: /usr/tce/packages/gcc/gcc-8.1.0/bin/gfortran
+      spec: clang@10.0.0
+      target: x86_64
+
+  packages:
+    all:
+      # This defaults us to machine specific flags of ivybridge which allows
+      # us to run on broadwell as well
+      target: [ivybridge]
+      compiler: [gcc, intel, pgi, clang, xl, nag]
+      providers:
+        blas: [netlib-lapack]
+        lapack: [netlib-lapack]
+        mpi: [mvapich2]
+
+  # LLNL toss3 CUDA
+    cuda:
+      buildable: false
+      externals:
+      - spec: cuda@10.2
+        prefix: /opt/cudatoolkit/10.2
+
+  # Lock down which MPI we are using
+    mpi:
+      buildable: false
+    mvapich2:
+      buildable: false
+      externals:
+      - spec: mvapich2@2.3%clang@10.0.0 process_managers=slurm arch=linux-rhel7-ivybridge
+        prefix: /usr/tce/packages/mvapich2/mvapich2-2.3-clang-10.0.0
+
+    # blas is a bit more complicated because its a virtual package so fake it with
+    # the following per spack docs
+    netlib-lapack:
+      buildable: false
+      externals:
+      - spec: netlib-lapack@3.6.1
+        prefix: /usr
+
+    # System level packages to not build
+    autoconf:
+      buildable: false
+      externals:
+      - spec: autoconf@2.69
+        prefix: /usr
+    automake:
+      buildable: false
+      externals:
+      - spec: automake@1.13.4
+        prefix: /usr
+    bzip2:
+      buildable: false
+      externals:
+      - spec: bzip2@1.0.6
+        prefix: /usr
+    cmake:
+      version: [3.18.0]
+      buildable: false
+      externals:
+      - spec: cmake@3.18.0
+        prefix: /usr/tce/packages/cmake/cmake-3.18.0
+    gettext:
+      buildable: false
+      externals:
+      - spec: gettext@0.19.8.1
+        prefix: /usr
+    graphviz:
+      buildable: false
+      externals:
+      - spec: graphviz@2.30.1
+        prefix: /usr
+    libtool:
+      buildable: false
+      externals:
+      - spec: libtool@2.4.2
+        prefix: /usr
+    libx11:
+      buildable: false
+      externals:
+      - spec: libx11@1.20.4
+        prefix: /usr
+    m4:
+      buildable: false
+      externals:
+      - spec: m4@1.4.16
+        prefix: /usr
+    perl:
+      buildable: false
+      externals:
+      - spec: perl@5.16.3
+        prefix: /usr
+    pkg-config:
+      buildable: false
+      externals:
+      - spec: pkg-config@0.27.1
+        prefix: /usr
+    tar:
+      buildable: false
+      externals:
+      - spec: tar@1.26
+        prefix: /usr
+    readline:
+      buildable: false
+      externals:
+      - spec: readline@6.2
+        prefix: /usr
+    unzip:
+      buildable: false
+      externals:
+      - spec: unzip@6.0
+        prefix: /usr
+    zlib:
+      buildable: false
+      externals:
+      - spec: zlib@1.2.7
+        prefix: /usr
