@@ -18,7 +18,7 @@ variables:
 stages:
   - setup
   - generate-quartz
-  - generate-lassen
+#  - generate-lassen
   - build
   - clean
 #[--one-generate-per-stage]
