@@ -11,7 +11,7 @@ variables:
   SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_COMMIT_SHORT_SHA}/spack
   #[--create-unique-path]
   SPACK_DEBUG: "-d"
-  ENV_NAME: ""
+  ENV_NAME: "blt-test"
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
