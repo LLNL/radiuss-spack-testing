@@ -23,7 +23,6 @@ spack:
     root: /usr/workspace/radiuss/store/radiuss
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/raja
-  #[definitions--]
   definitions:
   - compilers:
       - '%gcc@8.3.1'

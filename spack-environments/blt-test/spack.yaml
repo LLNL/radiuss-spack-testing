@@ -7,14 +7,11 @@
 
 spack:
   include: [$SYS_TYPE]
-  #[general--]
   concretization: separately
   view: false
-  #[--general]
-  #[config-override--]
   config:
     install_tree:
-      root: /usr/workspace/radiuss/blt-test/install/radiuss
+      root: /usr/workspace/radiuss/blt-test/install/blt-test
       padded_length: 128
       projections:
         all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
@@ -24,7 +21,8 @@ spack:
     - $spack/var/spack/stage
   bootstrap:
     root: /usr/workspace/radiuss/store/radiuss
-  #[definitions--]
+  mirrors:
+    mirror: file:///usr/workspace/radiuss/mirrors/blt
   definitions:
   - compilers:
       - '%gcc@8.3.1'
@@ -32,13 +30,11 @@ spack:
   - compilers:
       - '%xl@16.1.1.7'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
-  #[definitions--]
   - projects:
     - blt-test@develop
     - blt-test@main
     - blt-test@0.5.0
     - blt-test@0.5.1
-  #[--definitions]
 
   specs:
   - matrix:
@@ -48,12 +44,10 @@ spack:
   gitlab-ci:
     mappings:
       # quartz
-      # [runner-mapping--]
       - match:
         - target=broadwell
         runner-attributes:
           tags: [quartz, shell]
-      # [--runner-mapping]
           script:
           - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
@@ -65,9 +59,7 @@ spack:
         runner-attributes:
           tags: [lassen, shell]
           script:
-          #[child-variables--]
           - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
-          #[--child-variables]
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
     service-job-attributes:
