@@ -31,12 +31,3 @@ stages:
 
 include:
   - local: .gitlab/generate.yml
-  - local: spack-environments/radiuss/ci-variables.yml
-    rules:
-      - if: '$ENV_NAME == "radiuss"'
-  - local: spack-environments/raja-suite/ci-variables.yml
-    rules:
-      - if: '$ENV_NAME == "raja-suite"'
-  - local: spack-environments/blt-test/ci-variables.yml
-    rules:
-      - if: '$ENV_NAME == "blt-test"'

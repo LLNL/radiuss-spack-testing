@@ -2,6 +2,8 @@
 
 set -e
 
+. spack-environments/${ENV_NAME}/ci-variables.bash
+
 #[get-spack--]
 if [[ ! -d ${SPACK_PATH} ]]
 then

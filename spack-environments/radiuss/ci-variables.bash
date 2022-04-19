@@ -5,6 +5,5 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-variables:
-  SPACK_REPO: https://github.com/davidbeckingsale/spack.git
-  SPACK_REF: blt-test
+export SPACK_REPO=https://github.com/spack/spack.git
+export SPACK_REF=develop

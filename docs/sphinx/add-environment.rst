@@ -42,46 +42,30 @@ if needed.
 CI variables
 ------------
 
-There are three (3) variables that need to be defined in the CI YAML
-configuration in order to make it work.
+Each project must define three (3) environment variables in order for the CI to
+work properly:
 
 * `ENV_NAME`: the name of the environment, which must match one of the
-  directories under `spack_environments`.
+  directories under `spack_environments`. This variable is defined in the CI
+  YAML configuration, either in `.gitlab-ci.yml` or as a project variable in
+  the GitLab instance (web client).
+
+For the other two variables, create a file named `ci-variables.bash` in
+`spack_environments/<ENV_NAME>`. In this file, add the definition of the
+missing variables:
 
 * `SPACK_REPO`: the URL where to clone Spack from.
 
 * `SPACK_REF`: the ref to checkout in Spack repo.
 
-The CI is configured to generate a subpipeline using the environment under the
-`spack_environments/<ENV_NAME>`. The two other variables will be retrieved in
-this same directory, but GitLab needs an hint.
+.. code-block:: bash
 
-First, create a file named `ci-variables.yml` in
-`spack_environments/<ENV_NAME>`. In this file, add the definition of the
-missing variables:
+  export SPACK_REPO=https://github.com/spack/spack.git
+  export SPACK_REF=develop
 
-.. code-block:: yaml
-
-  variables:
-    SPACK_REPO: <the url to you spack clone or upstream spack>
-    SPACK_REF: <the ref (branch, tag) to use in checkout in spack>
-
-Then edit the `.gitlab-ci.yml` file to add a conditional inclusion of you ci
-variable file:
-
-.. code-block:: yaml
-
-  include:
-    - local: spack-environments/<env_name>/ci-variables.yml
-      rules:
-        - if: '$ENV_NAME == "<env_name>"'
-    - local: spack-environments/radiuss/ci-variables.yml
-      rules:
-        - if: '$ENV_NAME == "radiuss"'
-
-This simply means that each time the CI runs with `ENV_NAME=<env_name>` it will
-include the appropriate variable file. All you need to do to run your
-environment pipeline is to set your environement name.
+For now on, each time the CI runs with `ENV_NAME=<env_name>` it will include
+the appropriate variable file. All you need to do to run your environment
+pipeline is to set `ENV_NAME`.
 
 Pull Request worflow
 --------------------
