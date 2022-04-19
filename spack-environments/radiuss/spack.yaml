@@ -44,34 +44,34 @@ spack:
   #[definitions--]
 
   - radiuss-projects:
-    - mfem@4.2.0
+    - mfem@4.3.0
     - hypre@2.20.0
     - sundials@5.5.0
     - samrai@3.12.0
     - xbraid@3.0.0
-    - umpire@5.0.1+openmp
-    - raja@0.13.0
+    - umpire@6.0.0+openmp
+    - raja@0.14.1
     - py-maestrowf@1.1.8
-    - conduit@0.7.1
+    - conduit@0.7.2
     - zfp@0.5.5
-    - axom@0.5.0
+    - axom@0.6.1
     - caliper@2.5.0 ~libdw
     - caliper@2.5.0 ~libdw ~papi
     #- ascent@0.7.0 #ascent requires vtk-m and vtk-h, which fail to build
     #- scr@2.0.0
     when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
   - radiuss-projects:
-    - mfem@4.2.0
+    - mfem@4.3.0
     #- hypre@2.20.0
     #- sundials@5.5.0
     #- samrai@3.12.0
     - xbraid@3.0.0
-    - umpire@4.1.2+openmp #axom requires +openmp
-    - raja@0.13.0
+    - umpire@6.0.0+openmp #axom requires +openmp
+    - raja@0.14.1
     - py-maestrowf@1.1.8
-    - conduit@0.7.1
+    - conduit@0.7.2
     - zfp@0.5.5
-    - axom@0.5.0 +mfem ~openmp ~cpp14
+    - axom@0.6.1 +mfem ~openmp ~cpp14
     - caliper@2.5.0 ~libdw ~papi
     #- ascent@0.7.0 #ascent requires vtk-m and vtk-h, which fail to build
     #- scr@2.0.0
@@ -86,7 +86,7 @@ spack:
     - [$compilers]
     exclude:
     - ascent@0.7.0 %clang@10.0.0
-    #- axom@0.5.0 ^conduit@0.7.1 %clang@10.0.0
+    #- axom@0.6.1 ^conduit@0.7.2 %clang@10.0.0
 
   gitlab-ci:
     mappings:
