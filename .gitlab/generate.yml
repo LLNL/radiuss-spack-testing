@@ -58,7 +58,7 @@ rm-spack:
 # quartz
 generate-on-quartz:
   extends: [.generate-pipeline, .on-quartz, .env_defined]
-  stage: generate-quartz
+  stage: generate
   before_script:
     - scripts/print-variables
 
@@ -76,21 +76,21 @@ build-on-quartz:
   needs: [generate-on-quartz]
 #[--send-variable-child]
 
-# lassen
-generate-on-lassen:
-  extends: [.generate-pipeline, .on-lassen, .env_defined]
-  stage: generate-lassen
-  before_script:
-    - scripts/print-variables
-
-build-on-lassen:
-  extends: [.env_defined]
-  stage: build
-  variables:
-    CHILD_SPACK_PATH: ${SPACK_PATH}
-  trigger:
-    include:
-      - artifact: "jobs_scratch_dir/pipeline.yml"
-        job: generate-on-lassen
-    strategy: depend
-  needs: [generate-on-lassen]
+## lassen
+#generate-on-lassen:
+#  extends: [.generate-pipeline, .on-lassen, .env_defined]
+#  stage: generate
+#  before_script:
+#    - scripts/print-variables
+#
+#build-on-lassen:
+#  extends: [.env_defined]
+#  stage: build
+#  variables:
+#    CHILD_SPACK_PATH: ${SPACK_PATH}
+#  trigger:
+#    include:
+#      - artifact: "jobs_scratch_dir/pipeline.yml"
+#        job: generate-on-lassen
+#    strategy: depend
+#  needs: [generate-on-lassen]
