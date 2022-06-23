@@ -99,7 +99,7 @@ spack:
           tags: [quartz, shell]
       # [--runner-mapping]
           script:
-          - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+          - . ${SPACK_PATH}/share/spack/setup-env.sh
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
 
@@ -110,7 +110,7 @@ spack:
           tags: [lassen, shell]
           script:
           #[child-variables--]
-          - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+          - . ${SPACK_PATH}/share/spack/setup-env.sh
           #[--child-variables]
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
@@ -118,5 +118,5 @@ spack:
     service-job-attributes:
       tags: [quartz, shell]
       before_script:
-      - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+      - . ${SPACK_PATH}/share/spack/setup-env.sh
 

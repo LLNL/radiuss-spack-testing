@@ -66,13 +66,13 @@ generate-on-quartz:
 build-on-quartz:
   extends: [.env_defined]
   stage: build
-  variables:
-    CHILD_SPACK_PATH: ${SPACK_PATH}
   trigger:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-quartz
     strategy: depend
+    forward:
+      pipeline_variables: true
   needs: [generate-on-quartz]
 #[--send-variable-child]
 
@@ -86,11 +86,11 @@ generate-on-lassen:
 build-on-lassen:
   extends: [.env_defined]
   stage: build
-  variables:
-    CHILD_SPACK_PATH: ${SPACK_PATH}
   trigger:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-lassen
     strategy: depend
+    forward:
+      pipeline_variables: true
   needs: [generate-on-lassen]

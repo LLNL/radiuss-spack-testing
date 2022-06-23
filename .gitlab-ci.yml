@@ -7,8 +7,8 @@
 
   #[create-unique-path--]
 variables:
-  SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_COMMIT_SHORT_SHA}
-  SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_COMMIT_SHORT_SHA}/spack
+  SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}
+  SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}/spack
   #[--create-unique-path]
   SPACK_DEBUG: "-d"
   ENV_NAME: ""
