@@ -7,6 +7,14 @@
 
   #[create-unique-path--]
 variables:
+# Use the umdev LLNL service user to run CI. This prevents from running
+# pipelines as an actual user.
+  LLNL_SERVICE_USER: bradiuss
+
+# Use the service user workspace. Solves permission issues, stores everything
+# at the same location whoever triggers a pipeline.
+  CUSTOM_CI_BUILDS_DIR: /usr/workspace/bradiuss/gitlab-runner
+
   SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}
   SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}/spack
   #[--create-unique-path]
