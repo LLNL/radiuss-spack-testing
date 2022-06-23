@@ -17,6 +17,7 @@ variables:
 
   SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}
   SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}/spack
+  SPACK_USER_PATH: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
   #[--create-unique-path]
   SPACK_DEBUG: "-d"
   ENV_NAME: ""
