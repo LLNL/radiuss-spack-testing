@@ -19,10 +19,10 @@ Structure
 =========
 
 There are two main parts in this projects:
-- The gitlab CI configuration, consisting of YAML files. The parent file is
+* The gitlab CI configuration, consisting of YAML files. The parent file is
   ``.gitlab-ci.yml`` and points to sub-parts in ``.gitlab`` using local
   ``includes``.
-- The spack environments, each one defined in a subdirectory of
+* The spack environments, each one defined in a subdirectory of
   ``spack-environments``.
 
 
