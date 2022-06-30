@@ -13,7 +13,15 @@ then
 fi
 
 if [[ ${MY_SPACK_COMMIT} ]]
-then # empty spack commit, use MY_SPACK_REF which should have a branch name.
+then
+  # MY_SPACK_COMMIT is defined and should have the commit hash to use.
+  cd ${MY_SPACK_PATH}
+  git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_COMMIT}
+  git checkout ${MY_SPACK_COMMIT}
+  git tag ${CI_PIPELINE_ID}
+  cd -
+else
+  # empty spack commit, use MY_SPACK_REF which should have a branch name.
   cd ${MY_SPACK_PATH}
   git checkout -b temp
   git branch -D ${MY_SPACK_REF}
@@ -21,12 +29,6 @@ then # empty spack commit, use MY_SPACK_REF which should have a branch name.
   git checkout ${MY_SPACK_REF}
   git tag ${CI_PIPELINE_ID}
   git branch -D temp
-  cd -
-else # MY_SPACK_COMMIT is defined and should have the commit hash to use.
-  cd ${MY_SPACK_PATH}
-  git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_COMMIT}
-  git checkout ${MY_SPACK_COMMIT}
-  git tag ${CI_PIPELINE_ID}
   cd -
 fi
 #[--get-spack]
