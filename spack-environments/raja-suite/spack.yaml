@@ -15,15 +15,9 @@ spack:
       padded_length: 128
       projections:
         all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
-    misc_cache: $spack/.misc_cache
-    test_stage: $spack/.test_stage
-    'build_stage:':
-    - $spack/var/spack/stage
-  bootstrap:
-    root: /usr/workspace/radiuss/store/bradiuss
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/raja
-  #[definitions--]
+
   definitions:
   - compilers:
       - '%gcc@8.3.1'
@@ -102,7 +96,9 @@ spack:
         runner-attributes:
           tags: [quartz, shell]
           script:
-          - . ${SPACK_PATH}/share/spack/setup-env.sh
+          - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+          - export SPACK_DISABLE_LOCAL_CONFIG=""
+          - export SPACK_USER_CACHE_PATH="${SPACK_USER_CACHE}"
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
 
@@ -112,11 +108,13 @@ spack:
         runner-attributes:
           tags: [lassen, shell]
           script:
-          - . ${SPACK_PATH}/share/spack/setup-env.sh
+          - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+          - export SPACK_DISABLE_LOCAL_CONFIG=""
+          - export SPACK_USER_CACHE_PATH="${SPACK_USER_CACHE}"
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
     service-job-attributes:
       tags: [quartz, shell]
       before_script:
-      - . ${SPACK_PATH}/share/spack/setup-env.sh
+      - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
 

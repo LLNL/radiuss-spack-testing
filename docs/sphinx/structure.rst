@@ -41,10 +41,10 @@ global variables defined in ``.gitlab-ci.yml`` are not automatically transmitted
 to the child pipelines.
 
 Among those variables, the user may want to change the value of:
-* ``SPACK_REPO``: the repo used to download Spack
-* ``SPACK_REF``: the ref in Spack repo that will be checked out.
-* ``SPACK_DEBUG``: a placeholder to turn on/off spack debug traces.
-* ``ENV_NAME``: the name of the environment to concretize, build and test.
+* ``MY_SPACK_REPO``: the repo used to download Spack
+* ``MY_SPACK_REF``: the ref in Spack repo that will be checked out.
+* ``MY_SPACK_DEBUG``: a placeholder to turn on/off spack debug traces.
+* ``MY_ENV_NAME``: the name of the environment to concretize, build and test.
 
 To modify any of these variables, it is recommended to use either CI variables
 in Gitlab settings UI, or Pipeline variables found in GitLab pipelines and

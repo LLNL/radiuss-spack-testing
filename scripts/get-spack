@@ -2,22 +2,31 @@
 
 set -e
 
-. spack-environments/${ENV_NAME}/ci-variables.bash
+. spack-environments/${MY_ENV_NAME}/ci-variables.bash
 
 #[get-spack--]
-if [[ ! -d ${SPACK_PATH} ]]
+if [[ ! -d ${MY_SPACK_PATH} ]]
 then
-  mkdir -p ${SPACK_PATH}/..
+  mkdir -p ${MY_SPACK_PATH}/..
   # A shallow clone is enough, and much faster.
-  git clone ${SPACK_REPO} --depth 1 --branch develop ${SPACK_PATH}
+  git clone ${MY_SPACK_REPO} --depth 1 --branch develop ${MY_SPACK_PATH}
 fi
 
-cd ${SPACK_PATH}
-git checkout -b temp
-git branch -D ${SPACK_REF}
-git fetch --depth 1 ${SPACK_REPO} ${SPACK_REF}:${SPACK_REF}
-git checkout ${SPACK_REF}
-git tag ${CI_PIPELINE_ID}
-git branch -D temp
-cd -
+if [[ ${MY_SPACK_COMMIT} ]]
+then # empty spack commit, use MY_SPACK_REF which should have a branch name.
+  cd ${MY_SPACK_PATH}
+  git checkout -b temp
+  git branch -D ${MY_SPACK_REF}
+  git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_REF}:${MY_SPACK_REF}
+  git checkout ${MY_SPACK_REF}
+  git tag ${CI_PIPELINE_ID}
+  git branch -D temp
+  cd -
+else # MY_SPACK_COMMIT is defined and should have the commit hash to use.
+  cd ${MY_SPACK_PATH}
+  git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_COMMIT}
+  git checkout ${MY_SPACK_COMMIT}
+  git tag ${CI_PIPELINE_ID}
+  cd -
+fi
 #[--get-spack]

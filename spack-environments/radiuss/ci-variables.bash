@@ -5,5 +5,5 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-export SPACK_REPO=https://github.com/spack/spack.git
-export SPACK_REF=c2af154cd24ab3ef501a7efc020f818ef60aa552
+export MY_SPACK_REPO=https://github.com/spack/spack.git
+export MY_SPACK_COMMIT=c2af154cd24ab3ef501a7efc020f818ef60aa552

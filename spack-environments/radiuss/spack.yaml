@@ -19,10 +19,6 @@ spack:
       padded_length: 128
       projections:
         all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
-    'build_stage:':
-    - $spack/var/spack/stage
-  bootstrap:
-    root: /usr/workspace/radiuss/store/bradiuss
   #[--config-override]
 
   mirrors:
@@ -97,7 +93,7 @@ spack:
           tags: [quartz, shell]
       # [--runner-mapping]
           script:
-          - . ${SPACK_PATH}/share/spack/setup-env.sh
+          - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
           - export SPACK_USER_CACHE_PATH="${SPACK_USER_CACHE}"
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
@@ -109,7 +105,7 @@ spack:
         runner-attributes:
           tags: [lassen, shell]
           script:
-          - . ${SPACK_PATH}/share/spack/setup-env.sh
+          - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
           - export SPACK_USER_CACHE_PATH="${SPACK_USER_CACHE}"
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
@@ -118,5 +114,5 @@ spack:
     service-job-attributes:
       tags: [quartz, shell]
       before_script:
-      - . ${SPACK_PATH}/share/spack/setup-env.sh
+      - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
 

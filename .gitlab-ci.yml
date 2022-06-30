@@ -15,12 +15,12 @@ variables:
 # at the same location whoever triggers a pipeline.
   CUSTOM_CI_BUILDS_DIR: /usr/workspace/bradiuss/gitlab-runner
 
-  SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}
-  SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}/spack
-  SPACK_USER_PATH: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+  MY_SPACK_PARENT_DIR: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}
+  MY_SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}/spack
+  MY_SPACK_USER_PATH: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
   #[--create-unique-path]
-  SPACK_DEBUG: "-d"
-  ENV_NAME: ""
+  MY_SPACK_DEBUG: "-d"
+  MY_ENV_NAME: ""
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]

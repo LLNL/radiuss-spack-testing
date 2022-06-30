@@ -9,24 +9,24 @@
 no-env-name:
   extends: [.on-quartz]
   rules:
-    - if: '$ENV_NAME == ""'
+    - if: '$MY_ENV_NAME == ""'
       when: always
     - when: never
   stage: setup
   script:
-    - echo "Variable \"ENV_NAME\" was not set."
-    - echo "\"ENV_NAME\" is required and should point to an existing directory in spack-environments."
+    - echo "Variable \"MY_ENV_NAME\" was not set."
+    - echo "\"MY_ENV_NAME\" is required and should point to an existing directory in spack-environments."
     - exit 1
 
 .env_defined:
   rules:
-    - if: '$ENV_NAME == ""'
+    - if: '$MY_ENV_NAME == ""'
       when: never
     - if: '$CI_JOB_NAME =~ /rm-spack/'
       when: always
     - when: on_success
 
-# Generate CI pipelines for the package in $ENV_NAME
+# Generate CI pipelines for the package in $MY_ENV_NAME
 #[get-spack--]
 get-spack:
   extends: [.on-quartz,.env_defined]
@@ -45,12 +45,12 @@ rm-spack:
 
 .generate-pipeline:
   script:
-    - . ${SPACK_PATH}/share/spack/setup-env.sh
-    - spack env activate spack-environments/${ENV_NAME}
-    - spack ${SPACK_DEBUG} ci generate
+    - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+    - spack env activate spack-environments/${MY_ENV_NAME}
+    - spack ${MY_SPACK_DEBUG} ci generate
         --artifacts-root "${CI_PROJECT_DIR}/jobs_scratch_dir"
         --output-file "${CI_PROJECT_DIR}/jobs_scratch_dir/pipeline.yml"
-    - cp -r spack-environments/${ENV_NAME}/${SYS_TYPE} ${CI_PROJECT_DIR}/jobs_scratch_dir/concrete_environment/
+    - cp -r spack-environments/${MY_ENV_NAME}/${SYS_TYPE} ${CI_PROJECT_DIR}/jobs_scratch_dir/concrete_environment/
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
