@@ -20,7 +20,7 @@ spack:
     'build_stage:':
     - $spack/var/spack/stage
   bootstrap:
-    root: /usr/workspace/radiuss/store/radiuss
+    root: /usr/workspace/radiuss/store/bradiuss
   mirrors:
     mirror: file:///usr/workspace/radiuss/mirrors/raja
   #[definitions--]
