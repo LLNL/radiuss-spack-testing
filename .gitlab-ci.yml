@@ -19,7 +19,7 @@ variables:
   MY_SPACK_PATH: ${CI_BUILDS_DIR}/../../llnl-stack-${CI_PIPELINE_ID}/spack
   MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
   #[--create-unique-path]
-  MY_SPACK_DEBUG: "-d"
+  MY_SPACK_DEBUG: ""
   MY_ENV_NAME: ""
 
 # We only do one generation per stage because we found conflicts otherwise
