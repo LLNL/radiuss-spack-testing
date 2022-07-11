@@ -9,7 +9,7 @@
 no-env-name:
   extends: [.on-quartz]
   rules:
-    - if: '$MY_ENV_NAME == ""'
+    - if: '$MY_ENV_NAME == "none"'
       when: always
     - when: never
   stage: setup
