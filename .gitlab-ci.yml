@@ -20,7 +20,7 @@ variables:
   MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
   #[--create-unique-path]
   MY_SPACK_DEBUG: ""
-  MY_ENV_NAME: ""
+  MY_ENV_NAME: "none"
 
 # We only do one generation per stage because we found conflicts otherwise
 #[one-generate-per-stage--]
@@ -35,7 +35,7 @@ stages:
 no-env-name:
   extends: [.on-quartz]
   rules:
-    - if: '$MY_ENV_NAME == ""'
+    - if: '$MY_ENV_NAME == "none"'
       when: always
     - when: never
   stage: setup
@@ -46,7 +46,7 @@ no-env-name:
 
 .env_defined:
   rules:
-    - if: '$MY_ENV_NAME == ""'
+    - if: '$MY_ENV_NAME == "none"'
       when: never
     - if: '$CI_JOB_NAME =~ /rm-spack/'
       when: always
@@ -61,4 +61,4 @@ no-env-name:
 include:
   - local: .gitlab/generate.yml
     rules:
-      - if: '$MY_ENV_NAME != ""'
+      - if: '$MY_ENV_NAME != "none"'
