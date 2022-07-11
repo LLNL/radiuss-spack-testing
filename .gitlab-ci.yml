@@ -78,4 +78,4 @@ rm-spack:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
 
 include:
-  - local: spack-environment/${MY_ENV_NAME}/pipeline.yml
+  - local: spack-environments/${MY_ENV_NAME}/pipeline.yml
