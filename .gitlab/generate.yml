@@ -61,7 +61,7 @@ rm-spack:
 # quartz
 generate-on-quartz:
   extends: [.generate-pipeline, .on-quartz, .env_defined]
-  stage: generate-quartz
+  stage: generate
   before_script:
     - scripts/print-variables
 
