@@ -64,6 +64,10 @@ generate-on-quartz:
   stage: generate
   before_script:
     - scripts/print-variables
+  rules:
+    - if: '$RUN_QUARTZ == "ON"'
+      when: on_success
+    - when: never
 
 #[send-variable-child--]
 build-on-quartz:
@@ -77,6 +81,10 @@ build-on-quartz:
     forward:
       pipeline_variables: true
   needs: [generate-on-quartz]
+  rules:
+    - if: '$RUN_QUARTZ == "ON"'
+      when: on_success
+    - when: never
 #[--send-variable-child]
 
 # lassen
@@ -85,6 +93,10 @@ generate-on-lassen:
   stage: generate-lassen
   before_script:
     - scripts/print-variables
+  rules:
+    - if: '$RUN_LASSEN == "ON"'
+      when: on_success
+    - when: never
 
 build-on-lassen:
   extends: [.env_defined]
@@ -97,3 +109,7 @@ build-on-lassen:
     forward:
       pipeline_variables: true
   needs: [generate-on-lassen]
+  rules:
+    - if: '$RUN_LASSEN == "ON"'
+      when: on_success
+    - when: never

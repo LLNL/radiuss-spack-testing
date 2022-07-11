@@ -39,3 +39,6 @@ stages:
 
 include:
   - local: .gitlab/generate.yml
+  - local: spack-environment/${MY_ENV_NAME}/ci-variables.yml
+    rules:
+      if: '$MY_ENV_NAME != ""'
