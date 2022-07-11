@@ -1,0 +1,27 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+# quartz
+generate-on-quartz:
+  extends: [.generate-pipeline, .on-quartz, .env_defined]
+  stage: generate
+  before_script:
+    - scripts/print-variables
+
+#[send-variable-child--]
+build-on-quartz:
+  extends: [.env_defined]
+  stage: build
+  trigger:
+    include:
+      - artifact: "jobs_scratch_dir/pipeline.yml"
+        job: generate-on-quartz
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  needs: [generate-on-quartz]
+#[--send-variable-child]
