@@ -6,7 +6,9 @@
 ##############################################################################
 
 variables:
-  MY_SPACK_REPO=https://github.com/spack/spack.git
+  MY_SPACK_REPO=https://github.com/davidbeckingsale/spack.git
   MY_SPACK_COMMIT=c2af154cd24ab3ef501a7efc020f818ef60aa552
-  RUN_LASSEN=ON
-  RUN_QUARTZ=ON
+
+include:
+  - local: .gitlab/quartz.yml
+  - local: .gitlab/lassen.yml
