@@ -7,13 +7,12 @@
 
 # lassen
 generate-on-lassen:
-  extends: [.generate-pipeline, .on-lassen, .env_defined]
+  extends: [.generate-pipeline, .on-lassen]
   stage: generate-lassen
   before_script:
     - scripts/print-variables
 
 build-on-lassen:
-  extends: [.env_defined]
   stage: build
   trigger:
     include:

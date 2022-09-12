@@ -7,14 +7,13 @@
 
 # quartz
 generate-on-quartz:
-  extends: [.generate-pipeline, .on-quartz, .env_defined]
+  extends: [.generate-pipeline, .on-quartz]
   stage: generate
   before_script:
     - scripts/print-variables
 
 #[send-variable-child--]
 build-on-quartz:
-  extends: [.env_defined]
   stage: build
   trigger:
     include:

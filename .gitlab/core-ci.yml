@@ -14,7 +14,7 @@
 # Generate CI pipelines for the package in $MY_ENV_NAME
 #[get-spack--]
 get-spack:
-  extends: [.on-quartz,.env_defined]
+  extends: [.on-quartz]
   stage: setup
   script:
     - scripts/get-spack
@@ -22,7 +22,7 @@ get-spack:
 
 #[rm-spack--]
 rm-spack:
-  extends: [.on-quartz,.env_defined]
+  extends: [.on-quartz]
   stage: clean
   script:
     - scripts/remove-spack
