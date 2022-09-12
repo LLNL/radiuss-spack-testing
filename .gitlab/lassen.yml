@@ -8,7 +8,7 @@
 # lassen
 generate-on-lassen:
   extends: [.generate-pipeline, .on-lassen]
-  stage: generate-lassen
+  stage: generate
   before_script:
     - scripts/print-variables
 
