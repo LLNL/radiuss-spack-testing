@@ -1,5 +1,12 @@
 #!/bin/bash
 
+##############################################################################
+# Copyright (c) 2022, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
 set -e
 
 #[get-spack--]
@@ -19,13 +26,13 @@ then
   git tag ${CI_PIPELINE_ID}
   cd -
 else
-  # empty spack commit, use MY_SPACK_REF which should have a branch name.
+  # empty spack commit, use MY_SPACK_BRANCH which should have a branch name.
   cd ${MY_SPACK_PATH}
   git checkout -b temp
-  git branch -D ${MY_SPACK_REF}
-  git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_REF}:${MY_SPACK_REF}
-  git checkout ${MY_SPACK_REF}
-  git tag ${CI_PIPELINE_ID}
+  git branch -D ${MY_SPACK_BRANCH}
+  git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_BRANCH}:${MY_SPACK_BRANCH}
+  git checkout ${MY_SPACK_BRANCH}
+  git tag ${MY_PIPELINE_ID}
   git branch -D temp
   cd -
 fi

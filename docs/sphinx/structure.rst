@@ -42,7 +42,9 @@ to the child pipelines.
 
 Among those variables, the user may want to change the value of:
 * ``MY_SPACK_REPO``: the repo used to download Spack
-* ``MY_SPACK_REF``: the ref in Spack repo that will be checked out.
+* ``MY_SPACK_COMMIT``: the commit in Spack repo that will be checked out.
+* ``MY_SPACK_BRANCH``: the branch in Spack repo that will be checked out (if
+  ``MY_SPACK_COMMIT`` is not set).
 * ``MY_SPACK_DEBUG``: a placeholder to turn on/off spack debug traces.
 * ``MY_ENV_NAME``: the name of the environment to concretize, build and test.
 
