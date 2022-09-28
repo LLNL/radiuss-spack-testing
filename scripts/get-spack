@@ -12,7 +12,7 @@ set -e
 #[get-spack--]
 if [[ ! -d ${MY_SPACK_PATH} ]]
 then
-  mkdir -p ${MY_SPACK_PATH}/..
+  mkdir -p ${MY_SPACK_PARENT_DIR}
   # A shallow clone is enough, and much faster.
   git clone ${MY_SPACK_REPO} --depth 1 --branch develop ${MY_SPACK_PATH}
 fi
