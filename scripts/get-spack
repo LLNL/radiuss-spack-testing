@@ -9,8 +9,6 @@
 
 set -e
 
-mkdir -p ${MY_SPACK_PARENT_DIR}
-
 #[get-spack--]
 if [[ ! -d ${MY_SPACK_PATH} ]]
 then
