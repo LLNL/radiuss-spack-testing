@@ -6,8 +6,8 @@
 ##############################################################################
 
 variables:
-  MY_SPACK_REPO=https://github.com/davidbeckingsale/spack.git
-  MY_SPACK_BRANCH=blt-test
+  MY_SPACK_REPO: https://github.com/davidbeckingsale/spack.git
+  MY_SPACK_BRANCH: blt-test
 
 include:
   - local: .gitlab/quartz.yml
