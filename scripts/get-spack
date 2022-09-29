@@ -27,7 +27,7 @@ then
   git tag ${CI_PIPELINE_ID}
   cd -
 else
-  # empty spack commit, use MY_SPACK_BRANCH which should have a branch name.
+  # empty spack commit, MY_SPACK_BRANCH which should have a branch name.
   cd ${MY_SPACK_PATH}
   git checkout -b temp
   git branch -D ${MY_SPACK_BRANCH}

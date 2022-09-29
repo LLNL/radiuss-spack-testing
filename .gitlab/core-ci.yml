@@ -20,14 +20,6 @@ get-spack:
     - scripts/get-spack
 #[--get-spack]
 
-#[rm-spack--]
-rm-spack:
-  extends: [.on-quartz]
-  stage: clean
-  script:
-    - scripts/remove-spack
-#[--rm-spack]
-
 .generate-pipeline:
   script:
     - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
@@ -42,4 +34,12 @@ rm-spack:
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
+
+#[rm-spack--]
+rm-spack:
+  extends: [.on-quartz]
+  stage: clean
+  script:
+    - scripts/remove-spack
+#[--rm-spack]
 
