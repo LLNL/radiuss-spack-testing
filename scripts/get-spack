@@ -30,7 +30,7 @@ else
   # empty spack commit, MY_SPACK_BRANCH which should have a branch name.
   cd ${MY_SPACK_PATH}
   git checkout -b temp
-  git branch -D ${MY_SPACK_BRANCH}
+  git branch -D ${MY_SPACK_BRANCH} || true
   git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_BRANCH}:${MY_SPACK_BRANCH}
   git checkout ${MY_SPACK_BRANCH}
   git tag ${MY_PIPELINE_ID}
