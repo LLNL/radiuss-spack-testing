@@ -8,7 +8,8 @@
 spack:
   #[general--]
   include: [$SYS_TYPE]
-  concretization: separately
+  #TODO: DOES NOT EXIST ANYMORE ?
+  #concretization: separately
   view: false
   #[--general]
 
