@@ -5,8 +5,11 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-.on-quartz:
-  tags: [shell, quartz]
+.on-oslic:
+  tags: [shell, oslic]
+
+.on-ruby:
+  tags: [shell, ruby]
 
 .on-lassen:
   tags: [shell, lassen]
@@ -14,7 +17,7 @@
 # Generate CI pipelines for the package in $MY_ENV_NAME
 #[get-spack--]
 get-spack:
-  extends: [.on-quartz]
+  extends: [.on-oslic]
   stage: setup
   script:
     - scripts/get-spack
@@ -37,7 +40,7 @@ get-spack:
 
 #[rm-spack--]
 rm-spack:
-  extends: [.on-quartz]
+  extends: [.on-oslic]
   stage: clean
   script:
     - scripts/remove-spack

@@ -7,8 +7,8 @@
 
 variables:
   MY_SPACK_REPO: https://github.com/spack/spack.git
-  MY_SPACK_BRANCH: v0.18.1
+  MY_SPACK_BRANCH: llnl/radiuss-packages-update
 
 include:
-  - local: .gitlab/quartz.yml
+  - local: .gitlab/ruby.yml
   - local: .gitlab/lassen.yml
