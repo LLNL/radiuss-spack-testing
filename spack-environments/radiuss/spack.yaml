@@ -51,7 +51,7 @@ spack:
     - caliper
     - ascent
     - scr
-    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+    when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
   - radiuss-projects:
     - mfem
     - hypre
