@@ -19,8 +19,6 @@ variables:
   MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
 #[--create-unique-path]
   MY_SPACK_DEBUG: ""
-# TEMP: enforce environment name
-  MY_ENV_NAME: "radiuss"
 
 stages:
   - setup
