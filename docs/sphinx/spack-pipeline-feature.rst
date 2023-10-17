@@ -80,15 +80,12 @@ commit ID:
    :start-after: [create-unique-path--]
    :end-before: [--create-unique-path]
 
-Then we propagate it to the child pipelines in the trigger job:
+Then we propagate it to the child pipelines in the trigger job using variable
+forwarding:
 
 .. literalinclude:: ../../.gitlab/generate.yml
    :start-after: [send-variable-child--]
    :end-before: [--send-variable-child]
-
-.. note:: We need to change the variable name to pass it to the child pipeline.
-   This has been`reported to GitLab
-   <https://gitlab.com/gitlab-org/gitlab/-/issues/213729>`_.
 
 Managing the GPG key
 --------------------

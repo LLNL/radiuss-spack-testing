@@ -12,7 +12,7 @@ Access the [documentation](https://radiuss-spack-testing.readthedocs.io/).
 
 The primary goal of this repo is to be used in Gitlab. The Gitlab CI configuration is such that it will use Spack pipeline feature to generate and run a pipeline that builds one of the environments in the `spack-environments` directory.
 
-The specific environment to be built is controlled by the CI variable `ENV_NAME`.
+The specific environment to be built is controlled by the CI variable `MY_ENV_NAME`.
 
 ### Installing
 

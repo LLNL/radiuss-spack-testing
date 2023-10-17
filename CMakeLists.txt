@@ -5,6 +5,9 @@
 # SPDX-License-Identifier: (MIT)
 ################################################################################
 
+cmake_minimum_required(VERSION 3.8)
+project( radiuss-spack-testing )
+
 ################################
 # CONFIG
 ################################

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-vars="ENV_NAME SPACK_REF SPACK_REPO SPACK_PATH"
+vars="MY_ENV_NAME MY_SPACK_COMMIT MY_SPACK_BRANCH MY_SPACK_REPO MY_SPACK_PATH"
 
 echo "--------------------------------"
 echo "---- Variables of interest "

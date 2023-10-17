@@ -5,5 +5,10 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-export SPACK_REPO=https://github.com/davidbeckingsale/spack.git
-export SPACK_REF=update-raja-suite-2022.03.0
+variables:
+  MY_SPACK_REPO: https://github.com/davidbeckingsale/spack.git
+  MY_SPACK_COMMIT: c2af154cd24ab3ef501a7efc020f818ef60aa552
+
+include:
+  - local: .gitlab/quartz.yml
+  - local: .gitlab/lassen.yml
