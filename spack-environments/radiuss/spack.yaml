@@ -28,11 +28,11 @@ spack:
   #[definitions--]
   definitions:
   - compilers:
-    - '%gcc@10.3.1'
-    - '%clang@14.0.6'
+    - '%gcc@=10.3.1'
+    - '%clang@=14.0.6'
     when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
   - compilers:
-    - '%xl@16.1.1.12.gcc.8.3.1'
+    - '%xl@=16.1.1.12.gcc.8.3.1'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   #[definitions--]
 
