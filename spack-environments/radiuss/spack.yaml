@@ -19,11 +19,25 @@ spack:
       root: /usr/workspace/radiuss/install/bradiuss
       padded_length: 128
       projections:
-        all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
+        all: "{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}"
+    build_stage::
+      - $user_cache_path/stage
+    test_stage: $user_cache_path/test
+    misc_cache: $user_cache_path/misc
+    flags:
+      keep_werror: 'all'
   #[--config-override]
 
   mirrors:
-    mirror: file:///usr/workspace/radiuss/mirrors/bradiuss
+    radiuss:
+      url: file:///usr/workspace/radiuss/mirrors/bradiuss
+      signed: false
+    gitlab_ci:
+      url: "oci://${CI_REGISTRY_IMAGE}"
+      access_pair:
+      - $CI_REGISTRY_USER
+      - $CI_JOB_TOKEN
+      signed: false
 
   #[definitions--]
   definitions:
