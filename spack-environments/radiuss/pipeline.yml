@@ -7,7 +7,7 @@
 
 variables:
   MY_SPACK_REPO: https://github.com/spack/spack.git
-  MY_SPACK_BRANCH: llnl/radiuss-packages-update
+  MY_SPACK_BRANCH: develop-2024-05-05
 
 include:
   - local: .gitlab/ruby.yml
