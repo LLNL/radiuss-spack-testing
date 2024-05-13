@@ -26,8 +26,6 @@ get-spack:
 .generate-pipeline:
   script:
     - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
-    - export SPACK_DISABLE_LOCAL_CONFIG=""
-    - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
     - spack env activate --without-view spack-environments/${MY_ENV_NAME}
     - spack concretize || spack concretize
     - spack ${MY_SPACK_DEBUG} ci generate
