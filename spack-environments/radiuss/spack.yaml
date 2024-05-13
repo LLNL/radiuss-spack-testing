@@ -33,7 +33,7 @@ spack:
       url: file:///usr/workspace/radiuss/mirrors/bradiuss
       signed: false
     gitlab_ci:
-      url: "oci://${CI_REGISTRY_IMAGE}"
+      url: oci://czregistry.llnl.gov:5050/radiuss/radiuss-spack-testing
       access_pair:
       - $CI_REGISTRY_USER
       - $CI_JOB_TOKEN
