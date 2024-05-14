@@ -19,13 +19,13 @@ spack:
       root: /usr/workspace/radiuss/install/bradiuss
       padded_length: 128
       projections:
-        all: "{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}"
-    build_stage::
-      - $user_cache_path/stage
+        all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
+    'build_stage:':
+    - $user_cache_path/stage
     test_stage: $user_cache_path/test
     misc_cache: $user_cache_path/misc
     flags:
-      keep_werror: 'all'
+      keep_werror: all
   #[--config-override]
 
   mirrors:
@@ -33,7 +33,7 @@ spack:
       url: file:///usr/workspace/radiuss/mirrors/bradiuss
       signed: false
     gitlab_ci:
-      url: "oci://czregistry.llnl.gov:5050/radiuss/radiuss-spack-testing"
+      url: 'oci://czregistry.llnl.gov:5050/radiuss/radiuss-spack-testing'
       access_pair:
       - $CI_REGISTRY_USER
       - $CI_JOB_TOKEN
@@ -91,16 +91,14 @@ spack:
     - [$compilers]
     exclude: []
 
-  gitlab-ci:
-    mappings:
-
-      # ruby
-      # [runner-mapping--]
+  ci:
+    target: gitlab
+    pipeline-gen:
+    - submapping:
       - match:
-        - 'target=cascadelake'
-        runner-attributes:
+        - target=cascadelake
+        build-job:
           tags: [ruby, shell]
-      # [--runner-mapping]
           script:
           - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
@@ -111,7 +109,7 @@ spack:
       # lassen
       - match:
         - 'target=ppc64le:'
-        runner-attributes:
+        build-job:
           tags: [lassen, shell]
           script:
           - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
@@ -120,8 +118,19 @@ spack:
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
           - spack -d ci rebuild
 
-    service-job-attributes:
-      tags: [oslic, shell]
-      before_script:
-      - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+      match_behavior: first
+    - reindex-job:
+        tags: [oslic, shell]
+        before_script:
+        - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+
+    - noop-job:
+        tags: [oslic, shell]
+        before_script:
+        - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
+
+    - cleanup-job:
+        tags: [oslic, shell]
+        before_script:
+        - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
 
