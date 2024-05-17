@@ -35,8 +35,8 @@ spack:
     gitlab_ci:
       url: oci://czregistry.llnl.gov:5050/radiuss/radiuss-spack-testing
       access_pair:
-      - bernede1
-      - sf7Vm3PzaFKjWHhPwmTk
+      - $CI_REGISTRY_USER
+      - $CI_JOB_TOKEN
       signed: false
 
   #[definitions--]
