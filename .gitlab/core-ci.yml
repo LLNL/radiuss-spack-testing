@@ -27,7 +27,7 @@ get-spack:
   script:
     - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
     - spack env activate --without-view spack-environments/${MY_ENV_NAME}
-    - spack mirror add --unsigned --oci-username ${CI_REGISTRY_USER} --oci-password ${CI_JOB_TOKEN} gitlab_ci oci://${CI_REGISTRY_IMAGE}
+    #- spack mirror add --unsigned --oci-username ${CI_REGISTRY_USER} --oci-password ${CI_JOB_TOKEN} gitlab_ci oci://${CI_REGISTRY_IMAGE}
     - spack concretize || spack concretize
     - spack ${MY_SPACK_DEBUG} ci generate
         --artifacts-root "${CI_PROJECT_DIR}/jobs_scratch_dir"
