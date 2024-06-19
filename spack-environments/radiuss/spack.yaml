@@ -103,8 +103,8 @@ spack:
           - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
           - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
-          - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
-          - spack -d ci rebuild
+          - cd ${SPACK_CONCRETE_ENV_DIR} && spack ${MY_SPACK_DEBUG} env activate --without-view .
+          - spack ${MY_SPACK_DEBUG} ci rebuild
 
       # lassen
       - match:
@@ -115,8 +115,8 @@ spack:
           - . ${MY_SPACK_PATH}/share/spack/setup-env.sh
           - export SPACK_DISABLE_LOCAL_CONFIG=""
           - export SPACK_USER_CACHE_PATH="${SPACK_USER_CACHE}"
-          - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
-          - spack -d ci rebuild
+          - cd ${SPACK_CONCRETE_ENV_DIR} && spack ${MY_SPACK_DEBUG} env activate --without-view .
+          - spack ${MY_SPACK_DEBUG} ci rebuild
 
       match_behavior: first
     - reindex-job:
