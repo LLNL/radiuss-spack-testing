@@ -29,9 +29,7 @@ spack:
   #[--config-override]
 
   mirrors:
-    mirror:
-      url: 'file:///usr/workspace/radiuss/mirrors/bradiuss'
-      signed: false
+    mirror: 'file:///usr/workspace/radiuss/mirrors/bradiuss'
   #  gitlab_ci:
   #    url: oci://czregistry.llnl.gov:5050/radiuss/radiuss-spack-testing
   #    access_pair:
