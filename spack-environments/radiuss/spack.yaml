@@ -102,7 +102,6 @@ spack:
           - export SPACK_USER_CACHE_PATH="${MY_SPACK_USER_CACHE}"
 
     - submapping:
-      match_behavior: first
       - match:
         - arch=linux-rhel8-ivybridge
         build-job:
@@ -117,6 +116,7 @@ spack:
           script:
           - cd ${SPACK_CONCRETE_ENV_DIR} && spack ${MY_SPACK_DEBUG} env activate --without-view .
           - spack ${MY_SPACK_DEBUG} ci rebuild
+      match_behavior: first
 
     - reindex-job:
         tags: [oslic, shell]
