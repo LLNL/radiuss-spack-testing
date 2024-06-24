@@ -105,14 +105,14 @@ spack:
         build-job:
           tags: [ruby, shell]
           script:
-          - cd ${SPACK_CONCRETE_ENV_DIR} && spack ${MY_SPACK_DEBUG} env activate --without-view .
+          - spack ${MY_SPACK_DEBUG} env activate --without-view ${SPACK_CONCRETE_ENV_DIR}
           - spack ${MY_SPACK_DEBUG} ci rebuild
       - match:
         - 'target=ppc64le:'
         build-job:
           tags: [lassen, shell]
           script:
-          - cd ${SPACK_CONCRETE_ENV_DIR} && spack ${MY_SPACK_DEBUG} env activate --without-view .
+          - spack ${MY_SPACK_DEBUG} env activate --without-view ${SPACK_CONCRETE_ENV_DIR}
           - spack ${MY_SPACK_DEBUG} ci rebuild
       match_behavior: first
 
