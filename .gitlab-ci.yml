@@ -29,6 +29,8 @@ stages:
   - clean
 
 include:
+  - project: 'lc-templates/id_tokens'
+    file: 'id_tokens.yml'
   - local: .gitlab/core-ci.yml
     rules:
       - if: $MY_ENV_NAME != null

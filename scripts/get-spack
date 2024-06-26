@@ -33,7 +33,7 @@ else
   git branch -D ${MY_SPACK_BRANCH} || true
   git fetch --depth 1 ${MY_SPACK_REPO} ${MY_SPACK_BRANCH}:${MY_SPACK_BRANCH}
   git checkout ${MY_SPACK_BRANCH}
-  git tag ${MY_PIPELINE_ID}
+  git tag ${CI_PIPELINE_ID}
   git branch -D temp
   cd -
 fi
