@@ -20,9 +20,9 @@ ci:
   - submapping:
     - match:
       - arch=linux-rhel8-ivybridge
-      build-job::
+      build-job:
         tags: [ruby, shell]
-        script:
+        script::
         - spack ${MY_SPACK_DEBUG} env activate --without-view ${SPACK_CONCRETE_ENV_DIR}
         - spack ${MY_SPACK_DEBUG} config blame mirrors
         - spack ${MY_SPACK_DEBUG} mirror rm buildcache-destination
