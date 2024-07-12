@@ -7,7 +7,8 @@
 
 variables:
   MY_SPACK_REPO: https://github.com/spack/spack.git
-  MY_SPACK_COMMIT: 2d464f8c8903ce57cabe411bbe979583d4ccdb5d
+  #MY_SPACK_COMMIT: 2d464f8c8903ce57cabe411bbe979583d4ccdb5d # develop-2024-06-16
+  MY_SPACK_COMMIT: aeaa922eef45b14199b486fa2c188252df8c9544 # develop-2024-07-07
 
 include:
   - local: .gitlab/ruby.yml
