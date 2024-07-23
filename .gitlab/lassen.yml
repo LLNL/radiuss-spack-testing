@@ -18,6 +18,8 @@ build-on-lassen:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-lassen
+      - project: "lc-templates/id_tokens"
+        file: "id_tokens.yml"
     strategy: depend
     forward:
       pipeline_variables: true
