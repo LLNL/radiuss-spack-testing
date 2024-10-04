@@ -1,0 +1,69 @@
+##############################################################################
+# Copyright (c) 2021, Lawrence Livermore National Security, LLC and
+# RADIUSS Stack project contributors. See the LICENSE file for details.
+#
+# SPDX-License-Identifier: MIT
+##############################################################################
+
+spack:
+  include: [$SYS_TYPE]
+  concretization: separately
+  view: false
+  config:
+    install_tree:
+      root: /usr/workspace/radiuss/blt-test/install/blt-test
+      padded_length: 128
+      projections:
+        all: '{architecture}/{compiler.name}-{compiler.version}/{name}-{version}-{hash}'
+    misc_cache: $spack/.misc_cache
+    test_stage: $spack/.test_stage
+    'build_stage:':
+    - $spack/var/spack/stage
+  bootstrap:
+    root: /usr/workspace/radiuss/store/radiuss
+  mirrors:
+    mirror: file:///usr/workspace/radiuss/mirrors/blt
+  definitions:
+  - compilers:
+      - '%gcc@8.3.1'
+    when: env.get("SYS_TYPE", "") == "toss_3_x86_64_ib"
+  - compilers:
+      - '%xl@16.1.1.7'
+    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+  - projects:
+    - blt-test@develop
+    - blt-test@main
+    - blt-test@0.5.0
+    - blt-test@0.5.1
+
+  specs:
+  - matrix:
+    - [$projects]
+    - [$compilers]
+
+  gitlab-ci:
+    mappings:
+      # quartz
+      - match:
+        - target=broadwell
+        runner-attributes:
+          tags: [quartz, shell]
+          script:
+          - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+          - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
+          - spack -d ci rebuild
+
+      # lassen
+      - match:
+        - 'target=ppc64le:'
+        runner-attributes:
+          tags: [lassen, shell]
+          script:
+          - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+          - cd ${SPACK_CONCRETE_ENV_DIR} && spack env activate --without-view .
+          - spack -d ci rebuild
+    service-job-attributes:
+      tags: [quartz, shell]
+      before_script:
+      - . ${CHILD_SPACK_PATH}/share/spack/setup-env.sh
+

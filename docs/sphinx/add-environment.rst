@@ -45,32 +45,35 @@ CI variables
 Each project must define three (3) environment variables in order for the CI to
 work properly:
 
-* `ENV_NAME`: the name of the environment, which must match one of the
-  directories under `spack_environments`. This variable is defined in the CI
-  YAML configuration, either in `.gitlab-ci.yml` or as a project variable in
+* ``MY_ENV_NAME``: the name of the environment, which must match one of the
+  directories under ``spack_environments``. This variable is defined in the CI
+  YAML configuration, either in ``.gitlab-ci.yml`` or as a project variable in
   the GitLab instance (web client).
 
-For the other two variables, create a file named `ci-variables.bash` in
-`spack_environments/<ENV_NAME>`. In this file, add the definition of the
+For the other two variables, create a file named ``ci-variables.bash`` in
+``spack_environments/<MY_ENV_NAME>``. In this file, add the definition of the
 missing variables:
 
-* `SPACK_REPO`: the URL where to clone Spack from.
+* ``MY_SPACK_REPO``: the URL where to clone Spack from.
 
-* `SPACK_REF`: the ref to checkout in Spack repo.
+* ``MY_SPACK_COMMIT``: the commit to checkout in Spack repo.
+
+* ``MY_SPACK_BRANCH``: the branch to checkout in Spack repo (only if
+  ``MY_SPACK_COMMIT`` is not set).
 
 .. code-block:: bash
 
-  export SPACK_REPO=https://github.com/spack/spack.git
-  export SPACK_REF=develop
+  export MY_SPACK_REPO=https://github.com/spack/spack.git
+  export MY_SPACK_BRANCH=develop
 
-For now on, each time the CI runs with `ENV_NAME=<env_name>` it will include
+For now on, each time the CI runs with ``MY_ENV_NAME=<env_name>`` it will include
 the appropriate variable file. All you need to do to run your environment
-pipeline is to set `ENV_NAME`.
+pipeline is to set ``MY_ENV_NAME``.
 
 Pull Request worflow
 --------------------
 
-We recommend setting your environment name globally in `.gitlab-ci.yml`
+We recommend setting your environment name globally in ``.gitlab-ci.yml``
 
 Recommended adds-on
 ===================
@@ -92,11 +95,11 @@ Getting Started configuration
 -----------------------------
 
 As a getting started recommendation, and if you belong to RADIUSS group, we
-recommend creating a directory with you `ENV_NAME` in:
+recommend creating a directory with you ``MY_ENV_NAME`` in:
 
-* `/usr/workspace/radiuss/installs/<env_name>`
-* `/usr/workspace/radiuss/mirrors/<env_name>`
-* `/usr/workspace/radiuss/stores/<env_name>`
+* ``/usr/workspace/radiuss/installs/<env_name>``
+* ``/usr/workspace/radiuss/mirrors/<env_name>``
+* ``/usr/workspace/radiuss/stores/<env_name>``
 
 .. note::
 

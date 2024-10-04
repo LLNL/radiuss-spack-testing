@@ -1,0 +1,28 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+# ruby
+generate-on-ruby:
+  extends: [.generate-pipeline, .on-ruby]
+  stage: generate
+  before_script:
+    - scripts/print-variables
+
+#[send-variable-child--]
+build-on-ruby:
+  stage: build
+  trigger:
+    include:
+      - artifact: "jobs_scratch_dir/pipeline.yml"
+        job: generate-on-ruby
+      - project: "lc-templates/id_tokens"
+        file: "id_tokens.yml"
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  needs: [generate-on-ruby]
+#[--send-variable-child]
