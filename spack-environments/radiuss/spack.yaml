@@ -77,7 +77,7 @@ spack:
     - chai +cuda
     - care +cuda
 #    - py-maestrowf
-    - conduit +cuda
+#    - conduit
     - zfp +cuda
     - axom +cuda
     - caliper +cuda
