@@ -76,7 +76,7 @@ spack:
     - raja-perf +cuda
     - chai +cuda
     - care +cuda
-    - py-maestrowf
+#    - py-maestrowf
     - conduit +cuda
     - zfp +cuda
     - axom +cuda
