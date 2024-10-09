@@ -69,8 +69,8 @@ spack:
     - mfem +cuda
     - hypre +cuda
     - sundials +cuda
-    - samrai
-    - xbraid
+#    - samrai
+#    - xbraid
     - umpire +cuda
     - raja +cuda
     - raja-perf +cuda
@@ -82,7 +82,7 @@ spack:
     - axom +cuda
     - caliper +cuda
     - ascent +cuda
-    - scr
+#    - scr
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   - dependencies: []
   #[--definitions]
