@@ -19,7 +19,7 @@ ci:
 
   - submapping:
     - match:
-      - arch=linux-rhel8-ivybridge
+      - 'arch=x86_64:'
       build-job:
         tags: [ruby, shell]
         script::
