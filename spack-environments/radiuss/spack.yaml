@@ -37,12 +37,12 @@ spack:
     - '%gcc@=10.3.1'
     when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
   - compilers:
-    - '+cuda %clang@=12.0.1.ibm.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
-    - '+cuda %clang@=12.0.1.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
-    - '+cuda %clang@=14.0.5.gcc.8.3.1 ^cuda@11.7.0+allow-unsupported-compilers'
-    - '+cuda %clang@=16.0.6.ibm.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
-    - '+cuda %clang@=16.0.6.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
-    - '+cuda %gcc@=11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
+    - '%clang@=12.0.1.ibm.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
+    - '%clang@=12.0.1.gcc.8.3.1 ^cuda@11.2.0+allow-unsupported-compilers'
+    - '%clang@=14.0.5.gcc.8.3.1 ^cuda@11.7.0+allow-unsupported-compilers'
+    - '%clang@=16.0.6.ibm.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
+    - '%clang@=16.0.6.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
+    - '%gcc@=11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   #[definitions--]
 
@@ -66,22 +66,22 @@ spack:
     - scr
     when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
   - radiuss-projects:
-    - mfem
-    - hypre
-    - sundials
+    - mfem +cuda
+    - hypre +cuda
+    - sundials +cuda
     - samrai
     - xbraid
-    - umpire
-    - raja
-    - raja-perf
-    - chai
-    - care
+    - umpire +cuda
+    - raja +cuda
+    - raja-perf +cuda
+    - chai +cuda
+    - care +cuda
     - py-maestrowf
-    - conduit
-    - zfp
-    - axom
-    - caliper
-    - ascent
+    - conduit +cuda
+    - zfp +cuda
+    - axom +cuda
+    - caliper +cuda
+    - ascent +cuda
     - scr
     when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
   - dependencies: []
