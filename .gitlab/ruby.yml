@@ -5,6 +5,15 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
+
+#[get-spack--]
+get-spack:
+  extends: [.on-ruby]
+  stage: setup
+  script:
+    - scripts/get-spack
+#[--get-spack]
+
 # ruby
 generate-on-ruby:
   extends: [.generate-pipeline, .on-ruby]
