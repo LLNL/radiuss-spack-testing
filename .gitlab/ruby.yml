@@ -7,7 +7,7 @@
 
 
 #[get-spack--]
-get-spack:
+get-spack-ruby:
   extends: [.on-ruby]
   stage: setup
   script:

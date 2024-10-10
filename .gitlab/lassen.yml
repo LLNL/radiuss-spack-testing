@@ -7,7 +7,7 @@
 
 
 #[get-spack--]
-get-spack:
+get-spack-lassen:
   extends: [.on-lassen]
   stage: setup
   script:
