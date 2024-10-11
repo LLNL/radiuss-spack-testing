@@ -8,7 +8,7 @@
 
 #[get-spack--]
 get-spack-lassen:
-  extends: [.on-lassen]
+  extends: [.on-lassen, .lassen-variables]
   stage: setup
   script:
     - scripts/get-spack
@@ -16,12 +16,13 @@ get-spack-lassen:
 
 # lassen
 generate-on-lassen:
-  extends: [.generate-pipeline, .on-lassen]
+  extends: [.on-lassen, .lassen-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
 build-on-lassen:
+  extends: [.lassen-variables]
   stage: build
   trigger:
     include:

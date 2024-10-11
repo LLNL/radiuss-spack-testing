@@ -8,7 +8,7 @@
 
 #[get-spack--]
 get-spack-ruby:
-  extends: [.on-ruby]
+  extends: [.on-ruby, .ruby-variables]
   stage: setup
   script:
     - scripts/get-spack
@@ -16,13 +16,14 @@ get-spack-ruby:
 
 # ruby
 generate-on-ruby:
-  extends: [.generate-pipeline, .on-ruby]
+  extends: [.on-ruby, .ruby-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
 #[send-variable-child--]
 build-on-ruby:
+  extends: [.ruby-variables]
   stage: build
   trigger:
     include:

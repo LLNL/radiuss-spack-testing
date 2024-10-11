@@ -10,6 +10,8 @@
 
 .on-ruby:
   tags: [shell, ruby]
+
+.ruby-variables:
   variables:
     SPACK_DISABLE_LOCAL_CONFIG: ""
     MY_SPACK_DEBUG: ""
@@ -24,6 +26,8 @@
 
 .on-lassen:
   tags: [shell, lassen]
+
+.lassen-variables:
   variables:
     MY_SPACK_DEBUG: ""
     SPACK_DISABLE_LOCAL_CONFIG: ""
