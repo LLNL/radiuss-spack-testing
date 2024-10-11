@@ -10,6 +10,7 @@ spack:
   #[general--]
   include: [$SYS_TYPE]
   concretizer:
+    reuse: false
     unify: false
   view: false
   #[--general]
