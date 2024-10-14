@@ -245,11 +245,6 @@ packages::
     externals:
     - spec: expat@2.2.5
       prefix: /usr
-  libepoxy:
-    buildable: false
-    externals:
-    - spec: libepoxy@1.5.8
-      prefix: /usr
   flex:
     buildable: false
     externals:
@@ -289,6 +284,11 @@ packages::
     buildable: false
     externals:
     - spec: hwloc@2.9.0
+      prefix: /usr
+  libepoxy:
+    buildable: false
+    externals:
+    - spec: libepoxy@1.5.8
       prefix: /usr
   libtool:
     buildable: false
