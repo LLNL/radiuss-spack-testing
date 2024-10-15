@@ -1,6 +1,6 @@
 packages::
   all:
-    target: [x86_64]
+    target: [broadwell]
     compiler: [gcc, intel, pgi, clang, rocmcc, oneapi]
     providers:
       blas: [openblas]

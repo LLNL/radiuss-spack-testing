@@ -19,7 +19,7 @@ ci:
 
   - submapping:
     - match:
-      - 'arch=x86_64:'
+      - 'target=broadwell'
       build-job:
         tags: [ruby, shell]
         script::

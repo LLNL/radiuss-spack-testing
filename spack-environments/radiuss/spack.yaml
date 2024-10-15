@@ -65,7 +65,7 @@ spack:
     - caliper
     - ascent
     - scr
-    when: env.get("SYS_TYPE", "") == "toss_4_x86_64_ib"
+    when: env.get("LCSCHEDCLUSTER", "") == "ruby"
   - radiuss-projects:
     - mfem +cuda
     - hypre +cuda
@@ -84,7 +84,7 @@ spack:
     - caliper +cuda
     - ascent +cuda
 #    - scr
-    when: env.get("SYS_TYPE", "") == "blueos_3_ppc64le_ib_p9"
+    when: env.get("LCSCHEDCLUSTER", "") == "lassen"
   - dependencies: []
   #[--definitions]
 
