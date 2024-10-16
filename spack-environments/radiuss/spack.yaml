@@ -54,20 +54,20 @@ spack:
     - mfem
     - hypre
     - sundials
-    - samrai
-    - xbraid
+#    - samrai
+#    - xbraid
     - umpire
     - raja
     - raja-perf
     - chai
     - care
-    - py-maestrowf
-    - conduit
-    - zfp
+#    - py-maestrowf
+#    - conduit
+#    - zfp
     - axom
     - caliper
-    - ascent
-    - scr
+#    - ascent
+#    - scr
     when: env.get("LCSCHEDCLUSTER", "") == "corona"
   - radiuss-projects:
     - mfem
