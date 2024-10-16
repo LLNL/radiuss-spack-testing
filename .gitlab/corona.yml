@@ -1,0 +1,46 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+
+#[get-spack--]
+get-spack-corona:
+  extends: [.on-corona, .corona-variables]
+  stage: setup
+  script:
+    - scripts/get-spack
+#[--get-spack]
+
+# corona
+generate-on-corona:
+  extends: [.on-corona, .corona-variables, .generate-pipeline]
+  stage: generate
+  before_script:
+    - scripts/print-variables
+
+#[send-variable-child--]
+build-on-corona:
+  extends: [.corona-variables]
+  stage: build
+  trigger:
+    include:
+      - artifact: "jobs_scratch_dir/pipeline.yml"
+        job: generate-on-corona
+      - project: "lc-templates/id_tokens"
+        file: "id_tokens.yml"
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  needs: [generate-on-corona]
+#[--send-variable-child]
+
+#[rm-spack--]
+rm-spack-corona:
+  extends: [.on-corona, .corona-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack
+#[--rm-spack]
