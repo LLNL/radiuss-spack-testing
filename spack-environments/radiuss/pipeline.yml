@@ -14,5 +14,6 @@ variables:
   MY_SPACK_COMMIT: 7ad08213dc343c50f3cea2d3627e92d4e54a6421 # develop-2024-10-06
 
 include:
+  - local: .gitlab/corona.yml
   - local: .gitlab/ruby.yml
   - local: .gitlab/lassen.yml

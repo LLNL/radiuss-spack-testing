@@ -36,3 +36,11 @@ build-on-ruby:
       pipeline_variables: true
   needs: [generate-on-ruby]
 #[--send-variable-child]
+
+#[rm-spack--]
+rm-spack-ruby:
+  extends: [.on-ruby, .ruby-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack
+#[--rm-spack]

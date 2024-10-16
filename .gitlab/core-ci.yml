@@ -5,8 +5,21 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-.on-oslic:
-  tags: [shell, oslic]
+.on-corona:
+  tags: [shell, corona]
+
+.corona-variables:
+  variables:
+    SPACK_DISABLE_LOCAL_CONFIG: ""
+    MY_SPACK_DEBUG: ""
+#[create-unique-path--]
+    # Spack clone for corona generated pipeline
+    MY_SPACK_PARENT_DIR: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}-corona
+    # Spack cache for spack at pipeline generation time, then overridden by each CI job
+    SPACK_USER_CACHE_PATH: ${CUSTOM_CI_BUILDS_DIR}/llnl-stack-${CI_PIPELINE_ID}-corona/spack-user-cache
+    # Spack cache for each CI job in the generated pipeline (avoids collision)
+    MY_SPACK_USER_CACHE: /dev/shm/llnl-stack-${CI_PIPELINE_ID}-${CI_JOB_ID}/spack-cache
+#[--create-unique-path]
 
 .on-ruby:
   tags: [shell, ruby]
@@ -57,12 +70,3 @@
   artifacts:
     paths:
       - "${CI_PROJECT_DIR}/jobs_scratch_dir"
-
-#[rm-spack--]
-rm-spack:
-  extends: [.on-oslic]
-  stage: clean
-  script:
-    - scripts/remove-spack
-#[--rm-spack]
-

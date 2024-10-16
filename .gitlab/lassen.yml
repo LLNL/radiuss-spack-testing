@@ -34,3 +34,11 @@ build-on-lassen:
     forward:
       pipeline_variables: true
   needs: [generate-on-lassen]
+
+#[rm-spack--]
+rm-spack-lassen:
+  extends: [.on-lassen, .lassen-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack
+#[--rm-spack]
