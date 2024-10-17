@@ -243,6 +243,11 @@ packages::
     externals:
     - spec: readline@7.0
       prefix: /usr
+  slurm:
+    buildable: false
+    externals:
+    - spec: slurm@23-11-1-1
+      prefix: /usr
   swig:
     buildable: false
     externals:
