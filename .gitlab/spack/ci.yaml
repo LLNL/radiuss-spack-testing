@@ -77,7 +77,7 @@ ci:
           --use-buildcache=package:never,dependencies:only
           /${SPACK_JOB_SPEC_DAG_HASH}
         - echo Pushing ${SPACK_JOB_SPEC_PKG_NAME} /${SPACK_JOB_SPEC_DAG_HASH}
-     - match:
+    - match:
       - 'target=zen3'
       build-job:
         tags: [tioga, shell]
