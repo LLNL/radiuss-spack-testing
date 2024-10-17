@@ -48,6 +48,10 @@ spack:
     - '+cuda %clang@=16.0.6.cuda.11.8.0.gcc.11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
     - '+cuda %gcc@=11.2.1 ^cuda@11.8.0+allow-unsupported-compilers'
     when: env.get("LCSCHEDCLUSTER", "") == "lassen"
+  - compilers:
+    - '+rocm amdgpu_target=gfx90a %rocmcc@=6.2.0 ^hip@6.2.0'
+    - '%cce@=18.0.0'
+    when: env.get("LCSCHEDCLUSTER", "") == "tioga"
   #[definitions--]
 
   - radiuss-projects:
@@ -68,7 +72,7 @@ spack:
     - caliper
 #    - ascent
 #    - scr
-    when: env.get("LCSCHEDCLUSTER", "") == "corona"
+    when: env.get("LCSCHEDCLUSTER", "") in ["corona", "tioga"]
   - radiuss-projects:
     - mfem
     - hypre

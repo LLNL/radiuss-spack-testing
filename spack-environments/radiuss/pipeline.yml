@@ -17,3 +17,4 @@ include:
   - local: .gitlab/corona.yml
   - local: .gitlab/ruby.yml
   - local: .gitlab/lassen.yml
+  - local: .gitlab/tioga.yml

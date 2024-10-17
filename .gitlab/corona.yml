@@ -5,23 +5,18 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-
-#[get-spack--]
 get-spack-corona:
   extends: [.on-corona, .corona-variables]
   stage: setup
   script:
     - scripts/get-spack
-#[--get-spack]
 
-# corona
 generate-on-corona:
   extends: [.on-corona, .corona-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
-#[send-variable-child--]
 build-on-corona:
   extends: [.corona-variables]
   stage: build
@@ -35,12 +30,9 @@ build-on-corona:
     forward:
       pipeline_variables: true
   needs: [generate-on-corona]
-#[--send-variable-child]
 
-#[rm-spack--]
 rm-spack-corona:
   extends: [.on-corona, .corona-variables]
   stage: clean
   script:
     - scripts/remove-spack
-#[--rm-spack]
