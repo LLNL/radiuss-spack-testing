@@ -1,0 +1,38 @@
+##############################################################################
+# Copyright (c) 2019-2021, Lawrence Livermore National Security, LLC and
+# RADIUSS project contributors. See the COPYRIGHT file for details.
+#
+# SPDX-License-Identifier: (MIT)
+##############################################################################
+
+get-spack-tioga:
+  extends: [.on-tioga, .tioga-variables]
+  stage: setup
+  script:
+    - scripts/get-spack
+
+generate-on-tioga:
+  extends: [.on-tioga, .tioga-variables, .generate-pipeline]
+  stage: generate
+  before_script:
+    - scripts/print-variables
+
+build-on-tioga:
+  extends: [.tioga-variables]
+  stage: build
+  trigger:
+    include:
+      - artifact: "jobs_scratch_dir/pipeline.yml"
+        job: generate-on-tioga
+      - project: "lc-templates/id_tokens"
+        file: "id_tokens.yml"
+    strategy: depend
+    forward:
+      pipeline_variables: true
+  needs: [generate-on-tioga]
+
+rm-spack-tioga:
+  extends: [.on-tioga, .tioga-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack
