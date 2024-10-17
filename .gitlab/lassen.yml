@@ -5,14 +5,20 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-# lassen
+get-spack-lassen:
+  extends: [.on-lassen, .lassen-variables]
+  stage: setup
+  script:
+    - scripts/get-spack
+
 generate-on-lassen:
-  extends: [.generate-pipeline, .on-lassen]
+  extends: [.on-lassen, .lassen-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
 build-on-lassen:
+  extends: [.lassen-variables]
   stage: build
   trigger:
     include:
@@ -24,3 +30,9 @@ build-on-lassen:
     forward:
       pipeline_variables: true
   needs: [generate-on-lassen]
+
+rm-spack-lassen:
+  extends: [.on-lassen, .lassen-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack

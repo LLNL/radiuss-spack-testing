@@ -5,40 +5,34 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-#[get-spack--]
-get-spack-ruby:
-  extends: [.on-ruby, .ruby-variables]
+get-spack-tioga:
+  extends: [.on-tioga, .tioga-variables]
   stage: setup
   script:
     - scripts/get-spack
-#[--get-spack]
 
-generate-on-ruby:
-  extends: [.on-ruby, .ruby-variables, .generate-pipeline]
+generate-on-tioga:
+  extends: [.on-tioga, .tioga-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
-#[send-variable-child--]
-build-on-ruby:
-  extends: [.ruby-variables]
+build-on-tioga:
+  extends: [.tioga-variables]
   stage: build
   trigger:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
-        job: generate-on-ruby
+        job: generate-on-tioga
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
     strategy: depend
     forward:
       pipeline_variables: true
-  needs: [generate-on-ruby]
-#[--send-variable-child]
+  needs: [generate-on-tioga]
 
-#[rm-spack--]
-rm-spack-ruby:
-  extends: [.on-ruby, .ruby-variables]
+rm-spack-tioga:
+  extends: [.on-tioga, .tioga-variables]
   stage: clean
   script:
     - scripts/remove-spack
-#[--rm-spack]
