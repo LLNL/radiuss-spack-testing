@@ -346,6 +346,11 @@ packages::
     externals:
     - spec: m4@1.4.18
       prefix: /usr
+  ncurses:
+    buildable: false
+    externals:
+    - spec: ncurses@6.1
+      prefix: /usr
   netlib-lapack:
     buildable: false
     externals:
