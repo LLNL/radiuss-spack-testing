@@ -43,7 +43,7 @@ ci:
       build-job:
         tags: [ruby, shell]
         script::
-        - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} ./.gitlab/spack/ci-scirpt.sh
+        - srun $( [[ -n "${JOBID}" ]] && echo "--jobid=${JOBID}" ) ${RUBY_JOB_ALLOC} ./.gitlab/spack/ci-script.sh
     - match:
       - 'target=power9le:'
       build-job:
