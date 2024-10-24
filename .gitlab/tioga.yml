@@ -5,35 +5,35 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-get-spack-lassen:
-  extends: [.on-lassen, .lassen-variables]
+get-spack-tioga:
+  extends: [.on-tioga, .tioga-variables]
   stage: setup
   script:
     - scripts/get-spack
 
-generate-on-lassen:
-  extends: [.on-lassen, .lassen-variables, .generate-pipeline]
+generate-on-tioga:
+  extends: [.on-tioga, .tioga-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
-build-on-lassen:
-  extends: [.lassen-variables]
+build-on-tioga:
+  extends: [.tioga-variables]
   stage: build
   trigger:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
-        job: generate-on-lassen
-      - local: ".gitlab/lassen-shared-alloc.yml"
+        job: generate-on-tioga
+      - local: ".gitlab/tioga-shared-alloc.yml"
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
     strategy: depend
     forward:
       pipeline_variables: true
-  needs: [generate-on-lassen]
+  needs: [generate-on-tioga]
 
-rm-spack-lassen:
-  extends: [.on-lassen, .lassen-variables]
+rm-spack-tioga:
+  extends: [.on-tioga, .tioga-variables]
   stage: clean
   script:
     - scripts/remove-spack

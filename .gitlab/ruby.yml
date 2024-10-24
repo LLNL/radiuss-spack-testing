@@ -5,20 +5,29 @@
 # SPDX-License-Identifier: (MIT)
 ##############################################################################
 
-# ruby
+#[get-spack--]
+get-spack-ruby:
+  extends: [.on-ruby, .ruby-variables]
+  stage: setup
+  script:
+    - scripts/get-spack
+#[--get-spack]
+
 generate-on-ruby:
-  extends: [.generate-pipeline, .on-ruby]
+  extends: [.on-ruby, .ruby-variables, .generate-pipeline]
   stage: generate
   before_script:
     - scripts/print-variables
 
 #[send-variable-child--]
 build-on-ruby:
+  extends: [.ruby-variables]
   stage: build
   trigger:
     include:
       - artifact: "jobs_scratch_dir/pipeline.yml"
         job: generate-on-ruby
+      - local: ".gitlab/ruby-shared-alloc.yml"
       - project: "lc-templates/id_tokens"
         file: "id_tokens.yml"
     strategy: depend
@@ -26,3 +35,11 @@ build-on-ruby:
       pipeline_variables: true
   needs: [generate-on-ruby]
 #[--send-variable-child]
+
+#[rm-spack--]
+rm-spack-ruby:
+  extends: [.on-ruby, .ruby-variables]
+  stage: clean
+  script:
+    - scripts/remove-spack
+#[--rm-spack]
