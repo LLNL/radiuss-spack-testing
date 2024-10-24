@@ -10,6 +10,10 @@ ci:
   target: gitlab
   pipeline-gen:
 
+  - any-job:
+      before_script:
+        - echo "This section cannot be empty because of Spack CI implementation."
+
   - submapping:
     - match:
       - 'target=zen'
