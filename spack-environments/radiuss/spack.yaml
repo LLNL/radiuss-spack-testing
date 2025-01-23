@@ -8,7 +8,10 @@
 
 spack:
   #[general--]
-  include: [$LCSCHEDCLUSTER]
+  include:
+    - ${LCSCHEDCLUSTER}/config.yaml
+    - https://raw.githubusercontent.com/LLNL/radiuss-spack-configs/refs/tags/v2025.01.0-spack-develop-2025-01-12/${SYS_TYPE}/compilers.yaml
+    - https://raw.githubusercontent.com/LLNL/radiuss-spack-configs/refs/tags/v2025.01.0-spack-develop-2025-01-12/${SYS_TYPE}/${LCSCHEDCLUSTER}/packages.yaml
   concretizer:
     reuse: false
     unify: false
